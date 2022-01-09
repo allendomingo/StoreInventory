@@ -1,5 +1,5 @@
 # Overview
-POC for making the backend for an inventory system using Node.js.
+An inventory system to aid in managing stock, reducing costs, and in accounting. Designed to be used by small businesses (particularly a industrial tools hardware store).
 
 ## Features
 - Item inventory tracking (item codes, supplier, manufacturer, condition, location, count, date of purchase, etc.)
@@ -9,4 +9,5 @@ POC for making the backend for an inventory system using Node.js.
 
 ## Architecture
 - Rest API framework using Express.js.
-- MongoDB Atlas (free) will be used as the database, 
+- MongoDB Atlas (free) will be used as the database.
+- ReactJs for FE
