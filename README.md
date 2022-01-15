@@ -11,3 +11,11 @@ An inventory system to aid in managing stock, reducing costs, and in accounting.
 - Rest API framework using Express.js.
 - MongoDB Atlas (free) will be used as the database.
 - ReactJs for FE
+
+## Dev 
+General:
+- commit message format: 'Ticket#: Commit Message'
+- multiple commits is preferred to a singular one for a PR when the changes are large
+
+BE:
+- Do not place the logic (or the majority of it at least) in the router file itself. Place it in functions in a service file (ie. a leadersService with the functions, to be used in the leadersRouter for the /leaders endpoint)
