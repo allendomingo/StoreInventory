@@ -1,0 +1,20 @@
+{
+  "definition": {
+		"openapi": "3.0.3",
+		"info": {
+			"title": "Inventory API",
+			"description": "API for inventory management",
+			"version": "1.0.0",
+			"contact": {
+				"name": "Allen Domingo"
+			}
+		},
+		"servers": [{
+			"url": "http://localhost:3000",
+			"description": "Local server"
+		}]
+	},
+	"apis": [
+		"./routes/*.js"
+	]
+}
