@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 **DoD**
-Add a list of requirements to be completed for this task to be considered "Done".
+- [ ] Checklist of requirements to be completed for this issue to be considered done
 
 **Endpoint**
 URL/s of the endpoint/s to be developed
