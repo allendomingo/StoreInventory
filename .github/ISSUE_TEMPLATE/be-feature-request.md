@@ -20,7 +20,7 @@ Expected input DTO model/sample
 Expected output DTO model/sample
 
 **Relevant Story**
-Basis of this issue, from an issue.
+Basis of this issue, from a/framed as a story.
 
 **Additional context**
 Add any other context or screenshots about the feature request here.

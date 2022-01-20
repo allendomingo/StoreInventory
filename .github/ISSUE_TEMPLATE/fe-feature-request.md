@@ -13,5 +13,8 @@ assignees: ''
 **Design Guide**
 Add files, images, or links for the UI/UX of this feature/enhancement.
 
+**Relevant Story**
+Basis of this issue, from a/framed as a story.
+
 **Additional context**
 Add any other context or screenshots about the feature request here.
