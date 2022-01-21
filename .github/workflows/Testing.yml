@@ -34,17 +34,14 @@ jobs:
     - name: Install Dependencies
       run: yarn
     - name: Run ESLint
-      run: yarn run eslint | tee /reports/lint-test-results.xml
+      run: |
+        mkdir -p ~/reports/
+        yarn run eslint | tee ~/reports/lint-test-results.xml
     - run: find ~ -name "lint-test-results.xml"
       if: always()
-    - name: 
-      if: always()
-      run: |
-        cd ~/reports/
-        ls -la 
     - name: Archive lint results
       if: always()
       uses: actions/upload-artifact@v2
       with:
         name: lint-test-results
-        path: reports/
+        path: ~/reports/
