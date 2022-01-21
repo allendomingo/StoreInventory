@@ -1,23 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const contactSchema = new Schema({
-  name: {
-    type: String,
-    unique: true
-  },
-  numbers: {
-    type: [String],
-    required: true
-  },
-  emails: {
-    type: [String],
-    required: true
-  }
-},{
-    timestamps: true
-})
-
 const supplierSchema = new Schema({
   name: {
     type: String,
@@ -28,10 +11,10 @@ const supplierSchema = new Schema({
     type: [String],
     required: true
   },
-  contacts: {
-    type: [contactSchema],
-    required: true
-  },
+  contacts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Contact'
+  }],
   brands: {
     type: [String],
     required: true
