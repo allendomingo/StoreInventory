@@ -22,8 +22,8 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ env.node-version }}
-        cache: 'Yarn'
     - run: yarn
+    - run: yarn cache dir
     - name: Run ESLint
       run: yarn run eslint -o reports/lint-test-results.xml
     - name: Archive lint results
