@@ -32,12 +32,16 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
     - name: Install Dependencies
-      if: steps.cache-nodemodules.outputs.cache-hit != 'true'
       run: yarn
     - name: Run ESLint
-      run: yarn run eslint | tee /reports/lint-test-results.txt
+      run: yarn run eslint | tee /reports/lint-test-results.xml
     - run: find ~ -name "lint-test-results.xml"
       if: always()
+    - name: 
+      if: always()
+      run: |
+      cd ~reports/
+      ls -la 
     - name: Archive lint results
       if: always()
       uses: actions/upload-artifact@v2
