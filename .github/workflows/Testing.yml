@@ -39,6 +39,7 @@ jobs:
       run: yarn
     - name: Run ESLint
       run: yarn run eslint -o reports/lint-test-results.xml
+    - run: find ~ -name "lint-test-results.xml"
     - name: Archive lint results
       uses: actions/upload-artifact@v2
       with:
