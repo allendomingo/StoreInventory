@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 // swagger documentation
 const swaggerJsDoc = require('swagger-jsdoc');
@@ -12,6 +14,15 @@ const swaggerOptions = require('./swagger.json');
 // routers
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+
+// add .env to process.env
+dotenv.config();
+
+// connect to mongodb server
+const connect = mongoose.connect(process.env.MONGO_URL);
+connect.then(() => {
+	console.log('Connected correctly to server');
+}, (err) => { console.log(err) });
 
 const app = express();
 
