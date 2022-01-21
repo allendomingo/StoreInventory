@@ -24,7 +24,8 @@ jobs:
         node-version: ${{ env.node-version }}
         cache: 'npm'
     - run: yarn
-    - run: yarn run eslint -o reports/lint-results.xml
+    - name: Run ESLint
+      run: eslint . --ext .js,.jsx,.ts,.tsx
     - name: Archive lint results
       uses: actions/upload-artifact@v2
       with:
