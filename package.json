@@ -9,8 +9,10 @@
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "http-errors": "~1.6.3",
+    "http-errors": "^2.0.0",
     "jade": "~1.11.0",
+    "mongoose": "^6.1.7",
+    "mongoose-currency": "^0.2.0",
     "morgan": "~1.9.1",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.3.0"
