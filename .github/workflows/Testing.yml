@@ -23,7 +23,7 @@ jobs:
       with:
         node-version: ${{ env.node-version }}
     - run: yarn
-    - run: yarn cache dir
+    - run: du -shc /.cache/*
     - name: Run ESLint
       run: yarn run eslint -o reports/lint-test-results.xml
     - name: Archive lint results
