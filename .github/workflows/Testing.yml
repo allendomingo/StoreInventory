@@ -13,18 +13,20 @@ env:
   node-version: "14.x"
 
 jobs:
-  lint-test:
-  - name: Checkout Code
-    uses: actions/checkout@v2
-  - name: Use Node.js ${{ node-version }}
-    uses: actions/setup-node@v2
-    with:
-      node-version: ${{ node-version }}
-      cache: 'npm'
-  - run: npm ci
-  - run: npm run eslint -o reports/lint-results.xml
-  - name: Archive lint results
-    uses: actions/upload-artifact@v2
-    with:
-      name: lint-test-results
-      path: reports/
+  lint_test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    - name: Use Node.js ${{ node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run eslint -o reports/lint-results.xml
+    - name: Archive lint results
+      uses: actions/upload-artifact@v2
+      with:
+        name: lint-test-results
+        path: reports/
