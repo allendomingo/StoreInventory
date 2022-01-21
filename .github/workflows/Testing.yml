@@ -40,8 +40,8 @@ jobs:
     - name: 
       if: always()
       run: |
-      cd ~/reports/
-      ls -la 
+        cd ~/reports/
+        ls -la 
     - name: Archive lint results
       if: always()
       uses: actions/upload-artifact@v2
