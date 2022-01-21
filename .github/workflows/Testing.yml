@@ -38,7 +38,7 @@ jobs:
       if: steps.cache-nodemodules.outputs.cache-hit != 'true'
       run: yarn
     - name: Run ESLint
-      run: yarn run eslint -o reports/lint-test-results.xml
+      run: yarn run eslint
     - run: find ~ -name "lint-test-results.xml"
     - name: Archive lint results
       uses: actions/upload-artifact@v2
