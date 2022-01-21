@@ -1,8 +1,3 @@
----
-title: '[NET-0000] PR Title'
-
----
-
 ## Description
 Optional Short summary of this PR. May also use any of the fields below to relay information.
 
