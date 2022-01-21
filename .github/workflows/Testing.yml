@@ -36,7 +36,7 @@ jobs:
     - name: Run ESLint
       run: |
         mkdir -p ~/reports/
-        yarn run eslint | tee ~/reports/lint-test-results.xml
+        yarn run eslint |& tee ~/reports/lint-test-results.xml
     - run: find ~ -name "lint-test-results.xml"
       if: always()
     - name: Archive lint results
