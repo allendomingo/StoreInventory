@@ -40,7 +40,7 @@ jobs:
     - name: 
       if: always()
       run: |
-      cd ~reports/
+      cd ~/reports/
       ls -la 
     - name: Archive lint results
       if: always()
