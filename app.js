@@ -12,6 +12,7 @@ const swaggerOptions = require('./swagger.json');
 // routers
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const suppliersRouter = require('./routes/suppliers')
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 // add routers
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/suppliers', suppliersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
