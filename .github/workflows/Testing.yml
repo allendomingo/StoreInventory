@@ -36,12 +36,10 @@ jobs:
     - name: Run ESLint
       run: |
         mkdir -p ~/reports/
-        yarn run eslint > ~/reports/lint-test-results.xml
-    - run: find ~ -name "lint-test-results.xml"
-      if: always()
-    - name: Archive lint results
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-        name: lint-test-results
-        path: ~/reports/
+        yarn run eslint
+#    - name: Archive lint results
+#      if: always()
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: lint-test-results
+#        path: ~/reports/
