@@ -37,7 +37,9 @@ jobs:
     - name: Run ESLint
       run: yarn run eslint | tee /reports/lint-test-results.txt
     - run: find ~ -name "lint-test-results.xml"
+      if: always()
     - name: Archive lint results
+      if: always()
       uses: actions/upload-artifact@v2
       with:
         name: lint-test-results
