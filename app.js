@@ -15,11 +15,15 @@ const swaggerOptions = require('./swagger.json');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
+// constants
+const { getMongoUrl } = require('./constants/serverConfig')
+
 // add .env to process.env
 dotenv.config();
 
 // connect to mongodb server
-const connect = mongoose.connect(process.env.MONGO_URL);
+const connect = mongoose.connect(getMongoUrl());
+console.log(`Connecting to ${process.env.NODE_ENV} enviroment`)
 connect.then(() => {
 	console.log('Connected correctly to server');
 }, (err) => { console.log(err) });
