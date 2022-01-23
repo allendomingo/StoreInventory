@@ -19,5 +19,11 @@
     "morgan": "~1.9.1",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.3.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "^8.7.0",
+    "eslint-plugin-react": "^7.28.0"
   }
 }

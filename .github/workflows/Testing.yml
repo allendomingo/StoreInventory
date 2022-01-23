@@ -1,0 +1,43 @@
+name: Testing
+
+on:
+  pull_request:
+    branches: [ dev ]
+
+env:
+  node-version: "14.x"
+
+jobs:
+  lint_test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ env.node-version }}
+    - name: Cache node modules
+      id: cache-nodemodules
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+    - name: Install Dependencies
+      run: yarn
+    - name: Run ESLint
+      run: |
+        mkdir -p ~/reports/
+        yarn run eslint
+#    - name: Archive lint results
+#      if: always()
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: lint-test-results
+#        path: ~/reports/
