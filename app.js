@@ -14,17 +14,20 @@ const swaggerOptions = require('./swagger.json');
 // routers
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const suppliersRouter = require('./routes/suppliers')
+const suppliersRouter = require('./routes/suppliers');
+const customersRouter = require('./routes/customers');
+const transactionsRouter = require('./routes/transactions');
+const inventoryRouter = require('./routes/inventory');
 
 // constants
-const { getMongoUrl } = require('./constants/serverConfig')
+const { getMongoUrl } = require('./constants/serverConfig');
 
 // add .env to process.env
 dotenv.config();
 
 // connect to mongodb server
 const connect = mongoose.connect(getMongoUrl());
-console.log(`Connecting to ${process.env.NODE_ENV} enviroment`)
+console.log(`Connecting to ${process.env.NODE_ENV} enviroment`);
 connect.then(() => {
 	console.log('Connected correctly to server');
 }, (err) => { console.log(err) });
@@ -49,6 +52,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/suppliers', suppliersRouter);
+app.use('/customers', customersRouter);
+app.use('/transactions', transactionsRouter);
+app.use('/inventory', inventoryRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
