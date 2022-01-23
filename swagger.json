@@ -15,6 +15,7 @@
 		}]
 	},
 	"apis": [
-		"./routes/*.js"
+		"./routes/*.js",
+		"./models/*.js"
 	]
 }
