@@ -16,6 +16,7 @@ An inventory system to aid in managing stock, reducing costs, and in accounting.
 
 ## Dev 
 General:
+- suggested PR title format: [NET-0000] Title (ie. [NET-1010] Add login page)
 - branch name format: <issue type (ie. feature, enhancement, bug, etc.)>-<issue no. (ie. NET0000)> ie. feature-NET0000, bug-NET1000
 - commit message format: 'Ticket#: Commit Message'
 - multiple commits is preferred to a singular one for a PR when the changes are large

@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 // swagger documentation
 const swaggerJsDoc = require('swagger-jsdoc');
@@ -12,6 +14,19 @@ const swaggerOptions = require('./swagger.json');
 // routers
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+
+// constants
+const { getMongoUrl } = require('./constants/serverConfig')
+
+// add .env to process.env
+dotenv.config();
+
+// connect to mongodb server
+const connect = mongoose.connect(getMongoUrl());
+console.log(`Connecting to ${process.env.NODE_ENV} enviroment`)
+connect.then(() => {
+	console.log('Connected correctly to server');
+}, (err) => { console.log(err) });
 
 const app = express();
 
@@ -39,7 +54,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
