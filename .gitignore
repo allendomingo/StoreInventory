@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Swagger documentation output files
+swagger-output.json
