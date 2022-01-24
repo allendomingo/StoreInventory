@@ -1,4 +1,5 @@
 const swaggerAutogen = require('swagger-autogen')();
+const definitions = require('../models').definitions;
 
 const doc = {
   info: {
@@ -11,13 +12,13 @@ const doc = {
   },
   host: 'localhost:3000',
   schemes: ['http'],
+	definitions,
 };
 
 const outputFile = './bin/swagger-output.json';
 const endpointsFiles = [
 	'./app.js',
 	'./routes/*.js',
-	'./models/*.js'
 ];
 
 swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
