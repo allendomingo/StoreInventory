@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./bin/www",
-    "dev": "cross-env NODE_ENV=development node ./bin/www"
+    "dev": "cross-env NODE_ENV=development node ./bin/swagger.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -14,11 +14,11 @@
     "express": "~4.16.1",
     "http-errors": "^2.0.0",
     "jade": "~1.11.0",
-    "mongoose-currency": "^0.2.0",
     "mongodb": "^4.3.1",
-    "mongoose": "^6.1.7",
+    "mongoose": "4.13.21",
+    "mongoose-currency": "^0.2.0",
     "morgan": "~1.9.1",
-    "swagger-jsdoc": "^6.1.0",
+    "swagger-autogen": "^2.18.8",
     "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {

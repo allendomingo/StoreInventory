@@ -1,33 +1,43 @@
 const mongoose = require('mongoose')
-const contactSchema = require('./contact.js')
+const contact = require('./contact.js')
 const Schema = mongoose.Schema
+
+const supplierDefinition = {
+	$name: 'Ben\'s Supplies',
+	$address: '#1 Road St., City, Province, Philippines 0000',
+	contacts: [{ $ref: '#/definitions/Contact' }],
+	brands: ['BenQ', 'Corsair'],
+	notes: 'Friday specials',
+};
 
 const supplierSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   address: {
     type: [String],
-    required: true
+    required: true,
   },
   contacts: {
-    type: [contactSchema],
+    type: [contact.model],
     required: true
   },
   brands: {
     type: [String],
-    required: true
   },
   notes: {
     type: String,
-    default: ''
+    default: '',
   }
 },{
-    timestamps: true
+    timestamps: true,
 })
 
 const Supplier = mongoose.model('Supplier', supplierSchema)
 
-module.exports = Supplier
+module.exports = {
+	model: Supplier,
+	definition: supplierDefinition,
+};
