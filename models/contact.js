@@ -14,15 +14,8 @@ const contactSchema = new Schema({
     type: [String],
     required: true
   },
-  // Differentiate between supplier, customer, etc.
-  contactType: {
-    type: String,
-    required: true
-  }
 },{
     timestamps: true
 })
 
-const Contact = mongoose.model('Contact', contactSchema)
-
-module.exports = Contact
+module.exports = contactSchema

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const contactSchema = require('./contact.js')
 const Schema = mongoose.Schema
 
 const customerSchema = new Schema({
@@ -11,10 +12,10 @@ const customerSchema = new Schema({
     type: [String],
     required: true
   },
-  contacts: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Contact'
-  }],
+  contacts: {
+    type: [contactSchema],
+    required: true
+  },
   brands: {
     type: [String],
     required: true
