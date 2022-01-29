@@ -18,6 +18,8 @@
     "mongoose": "4.13.21",
     "mongoose-currency": "^0.2.0",
     "morgan": "~1.9.1",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.1.0",
     "swagger-autogen": "^2.18.8",
     "swagger-ui-express": "^4.3.0"
   },
