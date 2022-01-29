@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const contact = require('./contact.js')
 const Schema = mongoose.Schema
 
 const supplierDefinition = {
@@ -20,10 +19,10 @@ const supplierSchema = new Schema({
     type: [String],
     required: true,
   },
-  contacts: {
-    type: [contact.model],
-    required: true
-  },
+  contacts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Contact'
+  }],
   brands: {
     type: [String],
   },

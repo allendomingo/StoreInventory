@@ -1,25 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-/**
- * schemas:
- *   Contact:
- *     type: object
- *     properties:
- *       name:
- *         type: string
- *         description: The contact person's name.
- *       numbers:
- *         type: Array<string>
- *         description: The contact person's phone number/s.
- *       emails:
- *         type: Array<string>
- *         description: The contact person's email/s.
- *       contactType:
- *         type: string
- *         description: Whether the contact is a customer or a supplier
- */
-
 const contactDefinition = {
 	$name: 'Juan dela Cruz',
 	numbers: ['0900XXXXXXX'],
@@ -43,7 +24,9 @@ const contactSchema = new Schema({
     timestamps: true,
 });
 
+const Contact = mongoose.model('Contact', contactSchema)
+
 module.exports = {
-	model: contactSchema,
+	model: Contact,
 	definition: contactDefinition,
 };
