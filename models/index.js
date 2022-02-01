@@ -1,6 +1,7 @@
 const imports = {
 	Contact: require('./contact.js'),
 	Supplier: require('./supplier.js'),
+	User: require('./user.js'),
 };
 
 const models = {};
