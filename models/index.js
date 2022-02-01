@@ -2,6 +2,7 @@ const imports = {
 	Contact: require('./contact.js'),
 	Supplier: require('./supplier.js'),
 	User: require('./user.js'),
+	Inventory: require('./inventory.js')
 };
 
 const models = {};
