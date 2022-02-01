@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { CONTACTTYPES } = require('../constants/contactTypes.js')
 const Schema = mongoose.Schema;
 
 const contactDefinition = {
@@ -20,6 +21,11 @@ const contactSchema = new Schema({
   emails: {
     type: [String],
   },
+  contactType: {
+    type: String,
+    required: true,
+    enum: Object.values(CONTACTTYPES),
+  }
 },{
     timestamps: true,
 });
