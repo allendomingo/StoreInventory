@@ -14,8 +14,14 @@ An inventory system to aid in managing stock, reducing costs, and in accounting.
 - TBA for deployment
 - Swagger for documentation
 
-## Dev 
-General:
+## Dev
+Process:
+- Take issue from backlog, and place in the To Do column. Add estimate (in labels) if missing.
+- Move to the In Progress column when starting work on it.
+- When making a PR, make sure to link it to the relevant issue. Move to the linked issue to the For Review/Merging column.
+- Once the relevant PR's are merged, close the issue. This will automatically move it to the Done column (an intermediate status column will be added, once servers and automated deployment are set up).
+
+General Formatting:
 - suggested PR title format: [NET-0000] Title (ie. [NET-1010] Add login page)
 - branch name format: <issue type (ie. feature, enhancement, bug, etc.)>-<issue no. (ie. NET0000)> ie. feature-NET0000, bug-NET1000
 - commit message format: 'Ticket#: Commit Message'
