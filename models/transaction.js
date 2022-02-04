@@ -1,13 +1,29 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const Statuses = Object.freeze({
+	pendingApproval: 'Pending Approval',
+	pendingDelivery: 'Pending Delivery',
+	delivered: 'Delivered',
+	incompletePayment: 'Incomplete Payment',
+	paid: 'Paid',
+	cancelled: 'Cancelled',
+});
+
+const Types = Object.freeze({
+	purchase: 'Purchase',
+	sale: 'Sale',
+	debt: 'Debt',
+	loan: 'Loan',
+});
+
 // Sample purchase order transaction, pending for manager's approval
 const transactionDefinition = {
-	$status: 'pending approval',
+	$status: Statuses.pendingApproval,
 	$date: '2022-01-26',
 	$buyer: '<Insert Name of your company here>',
 	$seller: { $ref: '#/definitions/Supplier' },
-	$type: 'purchase',
+	$type: Types.purchase,
 	$secondaryType: 'PO',
 	$number: 1337,
 	$rows: [{
@@ -54,8 +70,9 @@ const transactionRowSchema = new Schema({
 });
 
 const transactionSchema = new Schema({
-  status: { // ie. pending approval, pending delivery, delivered, incomplete payment, paid, cancelled
+  status: {
 		type: String,
+		enum: Object.values(Statuses),
 		required: true,
 	},
   date: {
@@ -72,8 +89,9 @@ const transactionSchema = new Schema({
     ref: 'Supplier',
 		required: true,
 	},
-	type: { // purchase or sale
+	type: {
 		type: String,
+		enum: Object.values(Types),
     required: true,
 	},
 	secondaryType: {
@@ -111,6 +129,10 @@ const transactionSchema = new Schema({
 },{
     timestamps: true,
 })
+
+Object.assign(transactionSchema.statics, {
+  Statuses, Types,
+});
 
 const Transaction = mongoose.model('Transaction', transactionSchema);
 
