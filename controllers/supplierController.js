@@ -16,45 +16,36 @@ exports.createSupplier = function(newSupplier) {
 		return Suppliers.create(newSupplier);
 	}
 
-	try {
-		const parsedContacts = [];
-		const contactNameFilters = contacts.map(({ name }) => ({ name }));
-
-		return contactController.findContacts({ $or: contactNameFilters })
-			.then((existingContacts) => {
-				existingContacts.forEach(({ _id }) => parsedContacts.push(_id));
-
-				const existingContactNames = existingContacts.map(({ name }) => name);
-				const newContacts = contacts.filter(({ name }) => !existingContactNames.includes(name));
-
-				if (newContacts.length === 0) {
-					return null;
-				}
-				return contactController.createContacts(newContacts);
-			})
-			.then((newContacts) => {
-				if (newContacts) {
-					newContacts.forEach(({ _id }) => parsedContacts.push(_id));
-				}
-
-				return Suppliers.create({
-					...newSupplier,
-					contacts: parsedContacts,
-				}).then((newSupplier) => {
-					return Suppliers.findById(newSupplier._id).populate('contacts');
-				});
-			});
-	} catch (e) {
-		return Promise.reject(e);
-	}
+	return contactController.createContacts(contacts)
+		.then((parsedContacts) => {
+			return Suppliers.create({
+				...newSupplier,
+				contacts: parsedContacts,
+		}).then((newSupplier) => {
+			return Suppliers.findById(newSupplier._id).populate('contacts');
+		});
+	});
 };
 
-exports.updateSupplier = function(supplierId, updatedParams) {
-	// TODO: Handle contact parsing
+exports.updateSupplier = function(supplierId, updateParams) {
+	if (updateParams.contacts && updateParams.contacts.length > 0) {
+		return contactController.createContacts(updateParams.contacts)
+			.then((parsedContacts) => {
+				const parsedUpdateParams = {
+					...updateParams,
+					contacts: parsedContacts,
+				};
+				return Suppliers.findByIdAndUpdate(
+					supplierId,
+					{ $set: parsedUpdateParams },
+					{ new: true },
+				).populate('contacts');
+			});
+	}
 
 	return Suppliers.findByIdAndUpdate(
 		supplierId,
-		{ $set: updatedParams },
+		{ $set: updateParams },
 		{ new: true },
 	).populate('contacts');
 };
