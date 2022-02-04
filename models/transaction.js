@@ -57,7 +57,7 @@ const transactionRowSchema = new Schema({
 	},
 	discount: {
 		type: Number,
-    default: 0,
+		default: 0,
 	},
 	discountedAmount: { // effectively the final amount for the row
 		type: Number,
@@ -65,73 +65,73 @@ const transactionRowSchema = new Schema({
 	},
 	remarks: {
 		type: String,
-    default: '',
+		default: '',
 	},
 });
 
 const transactionSchema = new Schema({
-  status: {
+	status: {
 		type: String,
 		enum: Object.values(Statuses),
 		required: true,
 	},
-  date: {
+	date: {
 		type: Date,
 		required: true,
 	},
 	buyer: {
 		type: mongoose.Schema.Types.ObjectId,
-    ref: 'Customer',
+		ref: 'Customer',
 		required: true,
 	},
 	seller: {
 		type: mongoose.Schema.Types.ObjectId,
-    ref: 'Supplier',
+		ref: 'Supplier',
 		required: true,
 	},
 	type: {
 		type: String,
 		enum: Object.values(Types),
-    required: true,
+		required: true,
 	},
 	secondaryType: {
 		type: String,
-    required: true,
+		required: true,
 	},
 	number: {
 		type: Number,
-    required: true,
+		required: true,
 	},
 	rows: [transactionRowSchema],
 	totalAmount: {
 		type: Number,
-    required: true,
+		required: true,
 	},
 	discount: {
 		type: Number,
-    default: 0,
+		default: 0,
 	},
 	paymentAmount: {
 		type: Number,
 	},
 	withholdingTax: {
 		type: Number,
-    default: 0,
+		default: 0,
 	},
 	paymentMethod: {
 		type: String,
-    default: 'Cash',
+		default: 'Cash',
 	},
 	remarks: {
 		type: String,
-    default: '',
+		default: '',
 	},
 },{
-    timestamps: true,
+		timestamps: true,
 })
 
 Object.assign(transactionSchema.statics, {
-  Statuses, Types,
+	Statuses, Types,
 });
 
 const Transaction = mongoose.model('Transaction', transactionSchema);
