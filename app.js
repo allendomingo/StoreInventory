@@ -9,8 +9,8 @@ const dotenv = require('dotenv');
 // routers
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const suppliersRouter = require('./routes/suppliers');
-const customersRouter = require('./routes/customers');
+const suppliersRouter = require('./routes/supplierRouter');
+const customersRouter = require('./routes/customerRouter');
 const transactionsRouter = require('./routes/transactions');
 const inventoryRouter = require('./routes/inventory');
 
