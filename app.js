@@ -8,11 +8,11 @@ const dotenv = require('dotenv');
 
 // routers
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/userRouter');
 const suppliersRouter = require('./routes/supplierRouter');
 const customersRouter = require('./routes/customerRouter');
-const transactionsRouter = require('./routes/transactions');
-const inventoryRouter = require('./routes/inventory');
+const transactionsRouter = require('./routes/transactionsRouter');
+const inventoryRouter = require('./routes/inventoryRouter');
 
 // constants
 const { getMongoUrl } = require('./constants/serverConfig');
