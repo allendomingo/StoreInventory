@@ -1,6 +1,5 @@
-const express = require('express');
+const router = require('express').Router();
 const supplierController = require('../controllers/supplierController');
-const router = express.Router();
 
 router.get('/', (_, res, next) => {
   /**

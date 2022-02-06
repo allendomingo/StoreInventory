@@ -8,11 +8,11 @@ const dotenv = require('dotenv');
 
 // routers
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/usersRouter');
-const contactsRouter = require('./routes/contacts');
-const suppliersRouter = require('./routes/suppliersRouter');
-const customersRouter = require('./routes/customers');
-const transactionsRouter = require('./routes/transactions');
+const userRouter = require('./routes/users');
+const contactRouter = require('./routes/contacts');
+const supplierRouter = require('./routes/suppliers');
+const customerRouter = require('./routes/customers');
+const transactionRouter = require('./routes/transactions');
 const inventoryRouter = require('./routes/inventory');
 
 // constants
@@ -49,11 +49,11 @@ if (process.env.NODE_ENV === 'development') {
 
 // add routers
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/contacts', contactsRouter);
-app.use('/suppliers', suppliersRouter);
-app.use('/customers', customersRouter);
-app.use('/transactions', transactionsRouter);
+app.use('/users', userRouter);
+app.use('/contacts', contactRouter);
+app.use('/suppliers', supplierRouter);
+app.use('/customers', customerRouter);
+app.use('/transactions', transactionRouter);
 app.use('/inventory', inventoryRouter);
 
 // catch 404 and forward to error handler
