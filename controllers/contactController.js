@@ -1,5 +1,13 @@
 const Contacts = require('../models/contact').model;
 
+exports.getContacts = function() {
+	return Contacts.find({}).populate('contacts');
+};
+
+exports.getContact = function(contactId) {
+	return Contacts.findById(contactId);
+};
+
 exports.findContacts = function(filters) {
 	return Contacts.find(filters);
 };

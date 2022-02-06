@@ -8,11 +8,12 @@ const dotenv = require('dotenv');
 
 // routers
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/userRouter');
-const suppliersRouter = require('./routes/supplierRouter');
-const customersRouter = require('./routes/customerRouter');
-const transactionsRouter = require('./routes/transactionsRouter');
-const inventoryRouter = require('./routes/inventoryRouter');
+const usersRouter = require('./routes/usersRouter');
+const contactsRouter = require('./routes/contacts');
+const suppliersRouter = require('./routes/suppliersRouter');
+const customersRouter = require('./routes/customers');
+const transactionsRouter = require('./routes/transactions');
+const inventoryRouter = require('./routes/inventory');
 
 // constants
 const { getMongoUrl } = require('./constants/serverConfig');
@@ -49,6 +50,7 @@ if (process.env.NODE_ENV === 'development') {
 // add routers
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/contacts', contactsRouter);
 app.use('/suppliers', suppliersRouter);
 app.use('/customers', customersRouter);
 app.use('/transactions', transactionsRouter);
