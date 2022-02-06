@@ -1,5 +1,5 @@
 const express = require('express');
-const SupplierController = require('../controllers/supplierController');
+const supplierController = require('../controllers/supplierController');
 const router = express.Router();
 
 router.get('/', (_, res, next) => {
@@ -8,7 +8,7 @@ router.get('/', (_, res, next) => {
    * #swagger.summary = 'GET suppliers listing'
    * #swagger.description = 'Get the whole list of suppliers'
    */
-	SupplierController.getSuppliers()
+	supplierController.getSuppliers()
 		.then(suppliers => {
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'applicaton/json');
@@ -30,7 +30,7 @@ router.post('/', (req, res, next) => {
 	 		schema: { $ref: '#/definitions/Supplier' }
 	 }
    */
-	SupplierController.createSupplier(req.body)
+	supplierController.createSupplier(req.body)
 		.then(supplier => {
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'applicaton/json');
@@ -46,7 +46,7 @@ router.delete('/', (_, res, next) => {
    * #swagger.description = 'Delete all suppliers.
 	 		Contacts will not be deleted.'
    */
-	SupplierController.deleteSuppliers()
+	supplierController.deleteSuppliers()
 		.then(resp => {
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'applicaton/json');
@@ -61,7 +61,7 @@ router.get('/:supplierId', (req, res, next) => {
    * #swagger.summary = 'GET specified supplier'
    * #swagger.description = 'Get a specified supplier based on id'
    */
-	SupplierController.getSupplier(req.params.supplierId)
+	supplierController.getSupplier(req.params.supplierId)
 		.then(supplier => {
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'applicaton/json');
@@ -81,7 +81,7 @@ router.put('/:supplierId', (req, res, next) => {
 	 		schema: { $ref: '#/definitions/Supplier' }
 	 }
    */
-	SupplierController.updateSupplier(req.params.supplierId, req.body)
+	supplierController.updateSupplier(req.params.supplierId, req.body)
 		.then(updatedSupplier => {
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'applicaton/json');
@@ -96,7 +96,7 @@ router.delete('/:supplierId', (req, res, next) => {
    * #swagger.summary = 'DELETE specified supplier'
    * #swagger.description = 'DELETE a specified supplier based on id'
    */
-	SupplierController.deleteSupplier(req.params.supplierId)
+	supplierController.deleteSupplier(req.params.supplierId)
 		.then(resp => {
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'applicaton/json');
