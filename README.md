@@ -40,4 +40,5 @@ BE:
 7. The project should now be setup.
 
 ## Resources:
+General JS Coding Styleguide: https://google.github.io/styleguide/jsguide.html
 Swagger Documentation: http://<app_host>:<app_port>/api-docs (ie. http://localhost:3000/api-docs)
