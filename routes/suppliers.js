@@ -19,7 +19,7 @@ router.get('/', (_, res, next) => {
 router.post('/', (req, res, next) => {
   /**
    * #swagger.tags = ['Suppliers']
-   * #swagger.summary = 'POST suppliers listing'
+   * #swagger.summary = 'POST supplier'
    * #swagger.description = 'Add a supplier.
 	 	By default, this expects the contacts to be using their objectId's,
 	  but the actual contact schema form can also be used.'
@@ -93,7 +93,7 @@ router.delete('/:supplierId', (req, res, next) => {
   /**
    * #swagger.tags = ['Suppliers']
    * #swagger.summary = 'DELETE specified supplier'
-   * #swagger.description = 'DELETE a specified supplier based on id'
+   * #swagger.description = 'Delete a specified supplier based on id'
    */
 	supplierController.deleteSupplier(req.params.supplierId)
 		.then(resp => {
