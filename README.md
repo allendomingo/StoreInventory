@@ -21,7 +21,7 @@ Process:
 - When making a PR, make sure to link it to the relevant issue. Move to the linked issue to the For Review/Merging column.
 - Once the relevant PR's are merged, close the issue. This will automatically move it to the Done column (an intermediate status column will be added, once servers and automated deployment are set up).
 
-General Formatting:
+Recommended Practices:
 - suggested PR title format: [NET-0000] Title (ie. [NET-1010] Add login page)
 - branch name format: <issue type (ie. feature, enhancement, bug, etc.)>-<issue no. (ie. NET0000)> ie. feature-NET0000, bug-NET1000
 - commit message format: 'Ticket#: Commit Message'
@@ -30,4 +30,15 @@ General Formatting:
 BE:
 - Do not place the logic (or the majority of it at least) in the router file itself. Place it in functions in a service file (ie. a leadersService with the functions, to be used in the leadersRouter for the /leaders endpoint)
 
-Swagger Documentation: http://<app_host>:<app_port>/api-docs (ie.  http://localhost:3000/api-docs)
+## Starting Out (from scratch)
+1. Install git bash ([download link](https://git-scm.com/downloads)).
+2. Install VSCode ([download link](https://code.visualstudio.com/download)), and install the following (recommended) extensions: ESLint, GitLens, and Visual Studio IntelliCode.
+3. Install node package manager ([download link](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)).
+4. Using git bash, go to directory where project will be located in. If using windows, this can be achieved through file explorer, right clicking the directory, and opening git bash from there. Clone this repository.
+5. Open project in VSCode, and run 'npm install' in the terminal (can also be done in git bash when inside the project directory).
+6. <TODO: Add setup for mongo db/environment variables>
+7. The project should now be setup.
+
+## Resources:
+General JS Coding Styleguide: https://google.github.io/styleguide/jsguide.html
+Swagger Documentation: http://<app_host>:<app_port>/api-docs (ie. http://localhost:3000/api-docs)
