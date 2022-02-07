@@ -1,5 +1,13 @@
 const Contacts = require('../models/contact').model;
 
+exports.getContacts = function() {
+	return Contacts.find({}).populate('contacts');
+};
+
+exports.getContact = function(contactId) {
+	return Contacts.findById(contactId);
+};
+
 exports.findContacts = function(filters) {
 	return Contacts.find(filters);
 };
@@ -33,4 +41,24 @@ exports.createContacts = function(contacts) {
 			}
 			return Promise.resolve(parsedContacts);
 		});
+};
+
+exports.createContact = function(contact) {
+	return Contacts.create(contact);
+};
+
+exports.updateContact = function(contactId, updateParams) {
+	return Contacts.findByIdAndUpdate(
+		contactId,
+		{ $set: updateParams },
+		{ new: true },
+	);
+};
+
+exports.deleteContacts = function() {
+	return Contacts.deleteMany({});
+};
+
+exports.deleteContact = function(contactId) {
+	return Contacts.findByIdAndRemove(contactId);
 };

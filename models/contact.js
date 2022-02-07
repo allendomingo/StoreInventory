@@ -1,30 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-/**
- * schemas:
- *   Contact:
- *     type: object
- *     properties:
- *       name:
- *         type: string
- *         description: The contact person's name.
- *       numbers:
- *         type: Array<string>
- *         description: The contact person's phone number/s.
- *       emails:
- *         type: Array<string>
- *         description: The contact person's email/s.
- *       contactType:
- *         type: string
- *         description: Whether the contact is a customer or a supplier
- */
+const ContactTypes = Object.freeze({
+	supplier: 'Supplier',
+	customer: 'Customer',
+});
 
 const contactDefinition = {
 	$name: 'Juan dela Cruz',
 	numbers: ['0900XXXXXXX'],
 	emails: ['juandelacruz@email.com'],
-	$contactType: 'customer',
+	$contactType: [ContactTypes.customer],
 };
 
 const contactSchema = new Schema({
@@ -41,11 +27,16 @@ const contactSchema = new Schema({
   },
   // Differentiate between supplier, customer, etc.
   contactType: {
-    type: String,
+    type: [String],
+		enum: Object.values(ContactTypes),
     required: true,
   }
 },{
     timestamps: true,
+});
+
+Object.assign(contactSchema.statics, {
+	ContactTypes,
 });
 
 const Contact = mongoose.model('Contact', contactSchema);
