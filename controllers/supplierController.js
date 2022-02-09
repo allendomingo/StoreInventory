@@ -1,15 +1,24 @@
 const Suppliers = require('../models/supplier').model;
 const contactController = require('./contactController');
 
-exports.getSuppliers = function() {
-	return Suppliers.find({}).populate('contacts');
+exports.getSuppliers = function(willPopulate = true) {
+	const suppliers = Suppliers.find({});
+
+	if (willPopulate) {
+		return suppliers.populate('contacts');
+	}
+	return suppliers;
 };
 
-exports.getSupplier = function(supplierId) {
-	return Suppliers.findById(supplierId).populate('contacts');
+exports.getSupplier = function(supplierId, willPopulate = true) {
+	const supplier = Suppliers.findById(supplierId);
+	if (willPopulate) {
+		return supplier.populate('contacts');
+	}
+	return supplier;
 };
 
-exports.createSupplier = function(newSupplier) {
+exports.createSupplier = function(newSupplier, willPopulate = true) {
 	const { contacts } = newSupplier;
 
 	if (contacts.length === 0) {
@@ -22,12 +31,12 @@ exports.createSupplier = function(newSupplier) {
 				...newSupplier,
 				contacts: parsedContacts,
 		}).then((newSupplier) => {
-			return Suppliers.findById(newSupplier._id).populate('contacts');
+			return this.getSupplier(newSupplier._id, willPopulate);
 		});
 	});
 };
 
-exports.updateSupplier = function(supplierId, updateParams) {
+exports.updateSupplier = function(supplierId, updateParams, willPopulate = true) {
 	if (updateParams.contacts && updateParams.contacts.length > 0) {
 		return contactController.createContacts(updateParams.contacts)
 			.then((parsedContacts) => {
@@ -35,19 +44,29 @@ exports.updateSupplier = function(supplierId, updateParams) {
 					...updateParams,
 					contacts: parsedContacts,
 				};
-				return Suppliers.findByIdAndUpdate(
+				const updatedSupplier = Suppliers.findByIdAndUpdate(
 					supplierId,
 					{ $set: parsedUpdateParams },
 					{ new: true },
-				).populate('contacts');
+				);
+				
+				if (willPopulate) {
+					return updatedSupplier.populate('contacts');
+				}
+				return updatedSupplier;
 			});
 	}
 
-	return Suppliers.findByIdAndUpdate(
+	const updatedSupplier = Suppliers.findByIdAndUpdate(
 		supplierId,
 		{ $set: updateParams },
 		{ new: true },
-	).populate('contacts');
+	);
+	
+	if (willPopulate) {
+		return updatedSupplier.populate('contacts');
+	}
+	return updatedSupplier;
 };
 
 exports.deleteSuppliers = function() {
