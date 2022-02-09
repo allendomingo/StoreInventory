@@ -34,13 +34,14 @@ const transactionDefinition = {
 		discount: 10,
 		$discountedAmount: 15607.80,
 	}],
-	$totalAmount: 15607.80,
+	$rowAmount: 15607.80,
 	remarks: 'Need to replace broken mouse',
 };
 
 const transactionRowSchema = new Schema({
 	itemId: {
-		type: String, // TODO: Update to use inventory item object id
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Inventory',
 		required: true,
 	},
 	unitPrice: {
@@ -59,7 +60,7 @@ const transactionRowSchema = new Schema({
 		type: Number,
 		default: 0,
 	},
-	discountedAmount: { // effectively the final amount for the row
+	rowAmount: {
 		type: Number,
 		required: true,
 	},
