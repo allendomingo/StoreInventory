@@ -8,12 +8,12 @@ router.get('/', (req, res, next) => {
    * #swagger.description = 'GET inventory listing'
    */
    inventoryController.getItems(req.query)
-   .then(items => {
-     res.statusCode = 200;
-     res.setHeader('Content-Type', 'applicaton/json');
-     res.json(items);
-   })
-   .catch((err) => next(err));
+      .then(items => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'applicaton/json');
+      res.json(items);
+      })
+      .catch((err) => next(err));
 });
 
 router.post('/', (req, res, next) => {
