@@ -30,6 +30,8 @@ const inventorySchema = new Schema({
     timestamps: true,
 })
 
+inventorySchema.index({'name': 1, 'manufacturer': 1, 'category': 1}, {unique: true});
+
 const Inventory = mongoose.model('Inventory', inventorySchema)
 
 module.exports = {
