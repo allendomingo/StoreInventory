@@ -13,7 +13,7 @@ exports.findContacts = function(filters) {
 };
 
 // creates new contacts, and checks if that contact already exists
-// does not update existing contacts if passed contact is different
+// does not update existing contacts if passed params are different
 exports.createContacts = function(contacts) {
 	if (!contacts || contacts.length === 0) {
 		return Promise.resolve([]);
