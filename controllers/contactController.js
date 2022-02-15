@@ -19,10 +19,10 @@ exports.createContacts = function(contacts) {
 		return Promise.resolve([]);
 	}
 
-	// need to check if contact/s already exist
 	const parsedContacts = [];
-	const contactNameFilters = contacts.map(({ name }) => ({ name }));
 
+	// need to check if contact/s already exist
+	const contactNameFilters = contacts.map(({ name }) => ({ name }));
 	return this.findContacts({ $or: contactNameFilters })
 		.then((existingContacts) => {
 			existingContacts.forEach(({ _id }) => parsedContacts.push(_id));
