@@ -1,8 +1,9 @@
-const Suppliers = require('../models/supplier').model;
+const ObjectId = require('mongodb').ObjectId;
+const { Supplier } = require('../models').models;
 const contactController = require('./contactController');
 
 exports.getSuppliers = function(willPopulate = true) {
-	const suppliers = Suppliers.find({});
+	const suppliers = Supplier.find({});
 
 	if (willPopulate) {
 		return suppliers.populate('contacts');
@@ -11,25 +12,45 @@ exports.getSuppliers = function(willPopulate = true) {
 };
 
 exports.getSupplier = function(supplierId, willPopulate = true) {
-	const supplier = Suppliers.findById(supplierId);
+	const supplier = Supplier.findById(supplierId);
 	if (willPopulate) {
 		return supplier.populate('contacts');
 	}
 	return supplier;
 };
 
+exports.findSupplier = function(filters) {
+	return Supplier.findOne(filters);
+};
+
 exports.createSupplier = function(newSupplier, willPopulate = true) {
 	const { contacts } = newSupplier;
 
 	if (contacts.length === 0) {
-		return Suppliers.create(newSupplier);
+		return Supplier.create(newSupplier);
 	}
 
-	return contactController.createContacts(contacts)
-		.then((parsedContacts) => {
-			return Suppliers.create({
+	// separate contact ids and contact objects
+	const contactIds = [];
+	const newContacts = [];
+	
+	contacts.forEach((contact) => {
+		if (ObjectId.isValid(contact) && ObjectId(contact).toString() === contact) {
+			contactIds.push(contact);
+		} else { // assume contact object if not id
+			newContacts.push(contact);
+		}
+	});
+	
+	return contactController.createContacts(newContacts)
+		.then((newContactIds) => {
+			const parsedContactIds = [
+				...contactIds,
+				...newContactIds,
+			];
+			return Supplier.create({
 				...newSupplier,
-				contacts: parsedContacts,
+				contacts: parsedContactIds,
 		}).then((newSupplier) => {
 			return this.getSupplier(newSupplier._id, willPopulate);
 		});
@@ -44,7 +65,7 @@ exports.updateSupplier = function(supplierId, updateParams, willPopulate = true)
 					...updateParams,
 					contacts: parsedContacts,
 				};
-				const updatedSupplier = Suppliers.findByIdAndUpdate(
+				const updatedSupplier = Supplier.findByIdAndUpdate(
 					supplierId,
 					{ $set: parsedUpdateParams },
 					{ new: true },
@@ -57,7 +78,7 @@ exports.updateSupplier = function(supplierId, updateParams, willPopulate = true)
 			});
 	}
 
-	const updatedSupplier = Suppliers.findByIdAndUpdate(
+	const updatedSupplier = Supplier.findByIdAndUpdate(
 		supplierId,
 		{ $set: updateParams },
 		{ new: true },
@@ -70,9 +91,9 @@ exports.updateSupplier = function(supplierId, updateParams, willPopulate = true)
 };
 
 exports.deleteSuppliers = function() {
-	return Suppliers.deleteMany({});
+	return Supplier.deleteMany({});
 };
 
 exports.deleteSupplier = function(supplierId) {
-	return Suppliers.findByIdAndRemove(supplierId);
+	return Supplier.findByIdAndRemove(supplierId);
 };
