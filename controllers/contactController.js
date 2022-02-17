@@ -1,3 +1,4 @@
+const ObjectId = require('mongodb').ObjectId;
 const { Contact } = require('../models').models;
 
 exports.getContacts = function() {
@@ -62,3 +63,39 @@ exports.deleteContacts = function() {
 exports.deleteContact = function(contactId) {
 	return Contact.findByIdAndRemove(contactId);
 };
+
+exports.separateContacts = function(contacts) {
+	// separate contact ids and  objects
+	const contactIds = [];
+	const newContactObjects = [];
+	
+	contacts.forEach((contact) => {
+		if (ObjectId.isValid(contact) && ObjectId(contact).toString() === contact) {
+			contactIds.push(contact);
+		} else { // assume contact object if not id
+			newContactObjects.push(contact);
+		}
+	});
+
+	// check if contact id's exist
+	const parsedContactIds = this.findContacts({
+		$or: contactIds.map(_id => ({ _id }))
+	}).then((existingContacts) => {
+		const existingContactIds = existingContacts.map(({ _id }) => _id.toString());
+
+		// check if all contact ids were found
+		if (existingContactIds.length !== contactIds.length) {
+			const missingContactIds = contactIds.filter(id => !existingContactIds.includes(id));
+			return Promise.reject(
+				`Contacts with the following ids were not found: ${missingContactIds.join(', ')}`
+			);
+		}
+
+		return Promise.resolve(existingContactIds);
+	})
+
+	// create new contacts
+	const newContacts = this.createContacts(newContactObjects);
+
+	return Promise.all([parsedContactIds, newContacts]);
+}
