@@ -1,4 +1,3 @@
-const ObjectId = require('mongodb').ObjectId;
 const { Supplier } = require('../models').models;
 const contactController = require('./contactController');
 
@@ -29,23 +28,11 @@ exports.createSupplier = function(newSupplier, willPopulate = true) {
 	if (contacts.length === 0) {
 		return Supplier.create(newSupplier);
 	}
-
-	// separate contact ids and contact objects
-	const contactIds = [];
-	const newContacts = [];
 	
-	contacts.forEach((contact) => {
-		if (ObjectId.isValid(contact) && ObjectId(contact).toString() === contact) {
-			contactIds.push(contact);
-		} else { // assume contact object if not id
-			newContacts.push(contact);
-		}
-	});
-	
-	return contactController.createContacts(newContacts)
-		.then((newContactIds) => {
+	return contactController.separateContacts(contacts)
+		.then(([existingContactIds, newContactIds]) => {
 			const parsedContactIds = [
-				...contactIds,
+				...existingContactIds,
 				...newContactIds,
 			];
 			return Supplier.create({
@@ -59,11 +46,14 @@ exports.createSupplier = function(newSupplier, willPopulate = true) {
 
 exports.updateSupplier = function(supplierId, updateParams, willPopulate = true) {
 	if (updateParams.contacts && updateParams.contacts.length > 0) {
-		return contactController.createContacts(updateParams.contacts)
-			.then((parsedContacts) => {
+		return contactController.separateContacts(updateParams.contacts)
+			.then(([existingContactIds, newContactIds]) => {
 				const parsedUpdateParams = {
 					...updateParams,
-					contacts: parsedContacts,
+					contacts: [
+						...existingContactIds,
+						...newContactIds
+					],
 				};
 				const updatedSupplier = Supplier.findByIdAndUpdate(
 					supplierId,
