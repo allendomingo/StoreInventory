@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const { ROLES } = require('../constants/roles.js')
-const passportLocalMongoose = require('passport-local-mongoose')
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const { ROLES } = require('../constants/roles.js');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const userDefinition = {
 	$firstName: 'Jonel',
@@ -21,20 +21,19 @@ const User = new Schema({
     },
     email: {
       type: String,
-      required: true,
-      unique: true
+      unique: true,
+      required: true
     },
     role: {
       type: String,
       enum: Object.values(ROLES),
-      required: true,
       default: 'user'
     }
-})
+});
 
-User.plugin(passportLocalMongoose)
+User.plugin(passportLocalMongoose);
 
 module.exports = {
-	model: User,
+	model: mongoose.model('User', User),
 	definition: userDefinition,
 };
