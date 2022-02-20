@@ -9,6 +9,7 @@ const dotenv = require('dotenv');
 // routers
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const contactsRouter = require('./routes/contacts');
 const suppliersRouter = require('./routes/suppliers');
 const customersRouter = require('./routes/customers');
 const transactionsRouter = require('./routes/transactions');
@@ -49,6 +50,7 @@ if (process.env.NODE_ENV === 'development') {
 // add routers
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/contacts', contactsRouter);
 app.use('/suppliers', suppliersRouter);
 app.use('/customers', customersRouter);
 app.use('/transactions', transactionsRouter);
