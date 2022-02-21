@@ -40,6 +40,17 @@ router.post('/', (req, res, next) => {
 		.catch((err) => next(err));
 });
 
+router.put('/', (_, res) => {
+	/**
+	* #swagger.tags = ['Transactions']
+	* #swagger.summary = 'Operation forbidden'
+	* #swagger.description = 'Operation forbidden'
+	*/
+
+	res.statusCode = 403
+	res.end('PUT operation not supported on /transaction')
+});
+
 router.get('/:transactionId', (req, res, next) => {
   /**
    * #swagger.tags = ['Transactions']
@@ -53,6 +64,17 @@ router.get('/:transactionId', (req, res, next) => {
 			res.json(transaction);
 		})
 		.catch((err) => next(err));
+});
+
+router.put('/:transactionId', (_, res) => {
+	/**
+	* #swagger.tags = ['Transactions']
+	* #swagger.summary = 'POST specified transaction'
+	* #swagger.description = 'Operation forbidden'
+	*/
+
+	res.statusCode = 403
+	res.end('POST operation not supported on /transaction/:transactionId')
 });
 
 router.put('/:transactionId', (req, res, next) => {
