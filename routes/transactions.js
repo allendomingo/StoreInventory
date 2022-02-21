@@ -51,6 +51,21 @@ router.put('/', (_, res) => {
 	res.end('PUT operation not supported on /transaction')
 });
 
+router.delete('/', (_, res, next) => {
+  /**
+   * #swagger.tags = ['Transactions']
+   * #swagger.summary = 'DELETE transaction listing'
+   * #swagger.description = 'Delete all transactions.
+   */
+	transactionController.deleteTransactions()
+		.then(resp => {
+			res.statusCode = 200;
+			res.setHeader('Content-Type', 'applicaton/json');
+			res.json(resp);
+		})
+		.catch((err) => next(err));
+});
+
 router.get('/:transactionId', (req, res, next) => {
   /**
    * #swagger.tags = ['Transactions']
@@ -93,6 +108,21 @@ router.put('/:transactionId', (req, res, next) => {
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'applicaton/json');
 			res.json(updatedTransaction);
+		})
+		.catch((err) => next(err));
+});
+
+router.delete('/:transactionId', (req, res, next) => {
+  /**
+   * #swagger.tags = ['Transactions']
+   * #swagger.summary = 'DELETE specified transaction'
+   * #swagger.description = 'Delete a specified transaction based on id'
+   */
+	transactionController.deleteTransaction(req.params.transactionId)
+		.then(resp => {
+			res.statusCode = 200;
+			res.setHeader('Content-Type', 'applicaton/json');
+			res.json(resp);
 		})
 		.catch((err) => next(err));
 });

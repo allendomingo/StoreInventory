@@ -35,6 +35,8 @@ exports.createTransaction = function(transactionInput) {
 		return Promise.reject('Need to specify reason for cancellation in remarks');
 	}
 
+	// TODO: Confirm inventory item prices with listed prices, and require remark if different
+
 	// Compute subtotal amount per row and the total amount
 	const parsedRows = rows.map((row) => {
 		const { unitPrice, quantity, discount = 0 } = row;
@@ -104,3 +106,11 @@ exports.createTransaction = function(transactionInput) {
 
 	return Promise.reject(`Transaction type ${type} is invalid`);
 };
+
+exports.deleteTransactions = function() {
+	return Transaction.deleteMany({});
+}
+
+exports.deleteTransaction = function(transactionId) {
+	return Transaction.findByIdAndRemove(transactionId);
+}
