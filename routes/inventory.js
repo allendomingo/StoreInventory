@@ -39,7 +39,7 @@ router.post('/', (req, res, next) => {
 router.put('/', (_, res) => {
    /**
    * #swagger.tags = ['Inventory']
-   * #swagger.summary = 'PUT inventory items'
+   * #swagger.summary = 'Operation forbidden'
    * #swagger.description = 'Operation forbidden'
    */
 
@@ -80,7 +80,7 @@ router.get('/:itemId', (req, res, next) => {
 router.post('/:itemId', (req, res) => {
    /**
    * #swagger.tags = ['Inventory']
-   * #swagger.summary = 'POST inventory item'
+   * #swagger.summary = 'Operation forbidden'
    * #swagger.description = 'Operation forbidden'
    */
    res.statusCode = 403

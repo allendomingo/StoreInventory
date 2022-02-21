@@ -84,7 +84,7 @@ router.get('/:transactionId', (req, res, next) => {
 router.post('/:transactionId', (_, res) => {
 	/**
 	* #swagger.tags = ['Transactions']
-	* #swagger.summary = 'POST specified transaction'
+	* #swagger.summary = 'Operation forbidden'
 	* #swagger.description = 'Operation forbidden'
 	*/
 
