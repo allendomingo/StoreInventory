@@ -21,7 +21,7 @@ const Types = Object.freeze({
 const transactionDefinition = {
 	$status: Statuses.pendingApproval,
 	$date: '2022-01-26',
-	$buyer: '<Insert Name of your company here>',
+	$buyer: { $ref: '#/definitions/Customer' },
 	$seller: { $ref: '#/definitions/Supplier' },
 	$type: Types.purchase,
 	$secondaryType: 'PO',
@@ -34,7 +34,25 @@ const transactionDefinition = {
 		discount: 10,
 		$discountedAmount: 15607.80,
 	}],
-	$rowAmount: 15607.80,
+	$totalAmount: 15607.80,
+	remarks: 'Need to replace broken mouse',
+};
+
+// Sample 
+const transactionInputDTODefinition = {
+	$status: Statuses.pendingDelivery,
+	$date: '2022-02-10',
+	$buyer: 'Customer ObjectId',
+	$seller: 'Supplier ObjectId',
+	$type: Types.purchase,
+	$secondaryType: 'PO',
+	$number: 1337,
+	$rows: [{
+		$itemId: 'Inventory ObjectId',
+		$unitPrice: 8671,
+		$quantity: 2,
+		discount: 10,
+	}],
 	remarks: 'Need to replace broken mouse',
 };
 
@@ -83,12 +101,10 @@ const transactionSchema = new Schema({
 	buyer: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Customer',
-		required: true,
 	},
 	seller: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Supplier',
-		required: true,
 	},
 	type: {
 		type: String,
@@ -140,4 +156,5 @@ const Transaction = mongoose.model('Transaction', transactionSchema);
 module.exports = {
 	model: Transaction,
 	definition: transactionDefinition,
+	transactionInputDTO: transactionInputDTODefinition,
 };
