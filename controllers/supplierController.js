@@ -73,7 +73,7 @@ exports.updateSupplier = function(supplierId, updateParams, willPopulate = true)
 		{ $set: updateParams },
 		{ new: true },
 	);
-	
+
 	if (willPopulate) {
 		return updatedSupplier.populate('contacts');
 	}
