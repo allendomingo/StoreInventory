@@ -66,7 +66,7 @@ router.get('/:transactionId', (req, res, next) => {
 		.catch((err) => next(err));
 });
 
-router.put('/:transactionId', (_, res) => {
+router.post('/:transactionId', (_, res) => {
 	/**
 	* #swagger.tags = ['Transactions']
 	* #swagger.summary = 'POST specified transaction'
