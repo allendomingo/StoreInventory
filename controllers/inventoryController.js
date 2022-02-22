@@ -8,6 +8,10 @@ exports.getItem = function(itemId) {
 	return Inventory.findById(itemId);
 };
 
+exports.findItems = function(filters) {
+	return Inventory.find(filters);
+};
+
 exports.createItem = function(item) {
 	return Inventory.create(item);
 };
