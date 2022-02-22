@@ -35,6 +35,11 @@ const transactionDefinition = {
 		$discountedAmount: 15607.80,
 	}],
 	$totalAmount: 15607.80,
+	discount: 0,
+	$finalAmount: 15607.80,
+	withholdingTax: null,
+	paymentAmount: null,
+	paymentMethod: null,
 	remarks: 'Need to replace broken mouse',
 };
 
@@ -53,6 +58,10 @@ const transactionInputDTODefinition = {
 		$quantity: 2,
 		discount: 10,
 	}],
+	discount: 0,
+	withholdingTax: null,
+	paymentAmount: null,
+	paymentMethod: null,
 	remarks: 'Need to replace broken mouse',
 };
 
@@ -127,6 +136,9 @@ const transactionSchema = new Schema({
 	discount: {
 		type: Number,
 		default: 0,
+	},
+	finalAmount: {
+		type: Number,
 	},
 	paymentAmount: {
 		type: Number,
