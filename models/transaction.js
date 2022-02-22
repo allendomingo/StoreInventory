@@ -17,6 +17,14 @@ const Types = Object.freeze({
 	loan: 'Loan',
 });
 
+const Methods = Object.freeze({
+	cash: 'Cash',
+	gCash: 'GCash',
+	check: 'Check',
+	bankTransfer: 'Bank bankTransfer',
+	etc: 'etc',
+});
+
 // Sample purchase order transaction, pending for manager's approval
 const transactionDefinition = {
 	$status: Statuses.pendingApproval,
@@ -149,7 +157,8 @@ const transactionSchema = new Schema({
 	},
 	paymentMethod: {
 		type: String,
-		default: 'Cash',
+		enum: Object.values(Methods),
+		default: Methods.cash,
 	},
 	remarks: {
 		type: String,
@@ -160,7 +169,7 @@ const transactionSchema = new Schema({
 })
 
 Object.assign(transactionSchema.statics, {
-	Statuses, Types,
+	Statuses, Types, Methods,
 });
 
 const Transaction = mongoose.model('Transaction', transactionSchema);
