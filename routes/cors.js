@@ -1,7 +1,4 @@
-const express = require('express');
 const cors = require('cors');
-// eslint-disable-next-line no-unused-vars
-const app = express();
 
 const whitelist = ['http://localhost:3000', 'https://localhost:3443', 'http://localhost:4200'];
 var corsOptionsDelegate = (req, callback) => {
