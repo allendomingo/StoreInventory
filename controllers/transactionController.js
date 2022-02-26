@@ -2,6 +2,7 @@ const ObjectId = require('mongodb').ObjectId;
 const { Transaction } = require('../models').models;
 const { Statuses, Types } = Transaction;
 const supplierController = require('./supplierController');
+const inventoryController = require('./inventoryController');
 
 exports.getTransactions = function() {
 	return Transaction.find({})
@@ -17,31 +18,44 @@ exports.getTransaction = function(transactionId) {
 		.populate('rows.itemId');
 };
 
-exports.createTransaction = function(transactionInput) {
+exports.createTransaction = async function(transactionInput) {
 	const {
-		status,
-		type,
-		buyer = null,
-		seller = null,
+		status, type,
+		buyer = null, seller = null,
 		rows,
+		discount = 0,
+		paymentAmount, paymentMethod,
+		remarks,
 	} = transactionInput;
 
 	// Validate status, type, and other inputs
 	if (status === Statuses.incompletePayment && !transactionInput.remarks) {
-		return Promise.reject('Need to specify reason for incomplete payment in remarks');
+		return Promise.reject(new Error('Need to specify reason for incomplete payment in remarks'));
 	} else if (status === Statuses.paid && (!transactionInput.paymentAmount || !transactionInput.paymentMethod)) {
-		return Promise.reject('Paid transactions require both the amount paid and the transaction method');
+		return Promise.reject(new Error('Paid transactions require both the amount paid and the transaction method'));
 	} else if (status === Statuses.cancelled && !transactionInput.remarks) {
-		return Promise.reject('Need to specify reason for cancellation in remarks');
+		return Promise.reject(new Error('Need to specify reason for cancellation in remarks'));
 	}
 
-	// TODO: Confirm inventory item prices with listed prices, and require remark if different
+	// Check if item object ids passed are valid and exist
+	const itemIdFilters = rows.map(({ itemId }) => { itemId });
+	const items = await inventoryController.findItems({ $or: itemIdFilters });
+
+	if (items.length < itemIdFilters.length) {
+		const existingItemIds = items.map(({ itemId }) => itemId);
+		const nonexistentIds = itemIdFilters.filter(({ itemId }) => !existingItemIds.includes(itemId));
+		return Promise.reject(new Error(`Item Ids not found: ${nonexistentIds.join(' ')}`));
+	}
+
+	if (rows.any((row, i) => row.unitPrice !== items[i].srp && !row.remarks)) {
+		return Promise.reject(new Error('Missing remarks for item/s with different price/s from the SRP'));
+	}
 
 	// Compute subtotal amount per row and the total amount
 	const parsedRows = rows.map((row) => {
-		const { unitPrice, quantity, discount = 0 } = row;
+		const { unitPrice, quantity, discount: rowDiscount = 0 } = row;
 		const subTotalAmount = unitPrice * quantity;
-		const discountedAmount = subTotalAmount * (100 - discount) / 100;
+		const discountedAmount = subTotalAmount * (100 - rowDiscount) / 100;
 		return {
 			...row,
 			subTotalAmount,
@@ -49,21 +63,34 @@ exports.createTransaction = function(transactionInput) {
 		};
 	});
 	const totalAmount = parsedRows.reduce((acc, row) => acc + row.discountedAmount, 0);
+	const finalAmount = totalAmount * (100 - discount) / 100;
 
-	// TODO: Check if transaction is paid and the amount is correct
+	// Check if transaction is paid and the amount is correct
+	if (status === Statuses.paid) {
+		if (!paymentAmount) {
+			return Promise.reject(new Error('Missing payment amount for paid transaction'));
+		}
+		if (!paymentMethod) {
+			return Promise.reject(new Error('Missing payment method for paid transaction'));
+		}
+		if ((paymentAmount !== finalAmount) && !remarks) {
+			return Promise.reject(new Error('Amount paid is different from expected. Need remarks if valid.'));
+		}
+	}
 
 	// Update transaction object with computed amounts
 	const newTransaction = {
 		...transactionInput,
 		rows: parsedRows,
 		totalAmount,
+		finalAmount,
 	};
 
 	// Handle transactions where the user is the buyer
 	if ([Types.purchase, Types.loan].includes(type)) {
 		if (seller === null) {
 			// seller cannot be null in purchases and loans
-			return Promise.reject(`Seller cannot be null with transaction type ${type}`);
+			return Promise.reject(new Error(`Seller cannot be null with transaction type ${type}`));
 		}
 
 		let supplier = Promise.resolve(seller);
@@ -88,7 +115,7 @@ exports.createTransaction = function(transactionInput) {
 		return supplier.then((finalSeller) => {
 			if (finalSeller === null) {
 				// seller cannot be null in purchases and loans
-				return Promise.reject(`Seller is invalid.missing. Needs valid seller for transaction type ${type}`);
+				return Promise.reject(new Error(`Seller is invalid.missing. Needs valid seller for transaction type ${type}`));
 			}
 
 			return Transaction.create({
@@ -104,13 +131,13 @@ exports.createTransaction = function(transactionInput) {
 		return Promise.resolve(null);
 	}
 
-	return Promise.reject(`Transaction type ${type} is invalid`);
+	return Promise.reject(new Error(`Transaction type ${type} is invalid`));
 };
 
 exports.deleteTransactions = function() {
 	return Transaction.deleteMany({});
-}
+};
 
 exports.deleteTransaction = function(transactionId) {
 	return Transaction.findByIdAndRemove(transactionId);
-}
+};
