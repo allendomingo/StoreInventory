@@ -18,6 +18,7 @@ module.exports = {
   plugins: [],
   rules: {
     'global-require': 'off',
-		'func-names': 'as-needed',
+    'func-names': 0,
+    'no-underscore-dangle': 0,
   },
 };
