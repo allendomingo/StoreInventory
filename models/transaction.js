@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
 const Statuses = Object.freeze({
   pendingApproval: 'Pending Approval',
@@ -37,7 +37,7 @@ const transactionDefinition = {
   remarks: 'Need to replace broken mouse',
 };
 
-const transactionRowSchema = new Schema({
+const transactionRowSchema = new mongoose.Schema({
   itemId: {
     type: String, // TODO: Update to use inventory item object id
     required: true,
@@ -68,7 +68,7 @@ const transactionRowSchema = new Schema({
   },
 });
 
-const transactionSchema = new Schema({
+const transactionSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: Object.values(Statuses),
@@ -79,12 +79,12 @@ const transactionSchema = new Schema({
     required: true,
   },
   buyer: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Customer',
     required: true,
   },
   seller: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Supplier',
     required: true,
   },
@@ -133,7 +133,7 @@ Object.assign(transactionSchema.statics, {
   Statuses, Types,
 });
 
-const Transaction = model('Transaction', transactionSchema);
+const Transaction = mongoose.model('Transaction', transactionSchema);
 
 module.exports = {
   model: Transaction,

@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 const { ROLES } = require('../constants/roles');
 
@@ -9,7 +9,7 @@ const userDefinition = {
   $role: 'admin',
 };
 
-const User = new Schema({
+const User = new mongoose.Schema({
   firstName: {
     type: String,
     default: '',

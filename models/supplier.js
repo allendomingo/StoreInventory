@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
 const supplierDefinition = {
   $name: 'Ben\'s Supplies',
@@ -8,7 +8,7 @@ const supplierDefinition = {
   notes: 'Friday specials',
 };
 
-const supplierSchema = new Schema({
+const supplierSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -19,7 +19,7 @@ const supplierSchema = new Schema({
     required: true,
   },
   contacts: [{
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Contact',
   }],
   brands: {
@@ -33,7 +33,7 @@ const supplierSchema = new Schema({
   timestamps: true,
 });
 
-const Supplier = model('Supplier', supplierSchema);
+const Supplier = mongoose.model('Supplier', supplierSchema);
 
 module.exports = {
   model: Supplier,

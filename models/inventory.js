@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
 const inventoryDefinition = {
   $name: 'Pan de Coco',
@@ -7,7 +7,7 @@ const inventoryDefinition = {
   $quantity: 10,
 };
 
-const inventorySchema = new Schema({
+const inventorySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -31,7 +31,7 @@ const inventorySchema = new Schema({
 
 inventorySchema.index({ name: 1, manufacturer: 1, category: 1 }, { unique: true });
 
-const Inventory = model('Inventory', inventorySchema);
+const Inventory = mongoose.model('Inventory', inventorySchema);
 
 module.exports = {
   model: Inventory,

@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
 const ContactTypes = Object.freeze({
   supplier: 'Supplier',
@@ -12,7 +12,7 @@ const contactDefinition = {
   $contactType: [ContactTypes.customer],
 };
 
-const contactSchema = new Schema({
+const contactSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -38,7 +38,7 @@ Object.assign(contactSchema.statics, {
   ContactTypes,
 });
 
-const Contact = model('Contact', contactSchema);
+const Contact = mongoose.model('Contact', contactSchema);
 
 module.exports = {
   model: Contact,
