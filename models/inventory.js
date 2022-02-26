@@ -24,8 +24,11 @@ const inventorySchema = new Schema({
   quantity: {
     type: Number,
     required: true,
-    default: 0,
   },
+	srp: {
+		type: Number,
+		required: true,
+	},
 },{
     timestamps: true,
 })
