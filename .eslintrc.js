@@ -16,5 +16,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [],
-  rules: {},
+  rules: {
+    'global-require': 'off',
+  },
 };
