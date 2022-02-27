@@ -41,11 +41,6 @@ router.put('/', (_, res) => {
    * #swagger.tags = ['Inventory']
    * #swagger.summary = 'PUT inventory items'
    * #swagger.description = 'Operation forbidden'
-   * #swagger.parameters['obj'] = {
-       in: 'body',
-       description: 'Inventory object',
-       schema: { $ref: '#/definitions/Inventory' }
-   }
    */
 
   res.statusCode = 403;
@@ -87,11 +82,6 @@ router.post('/:itemId', (req, res) => {
    * #swagger.tags = ['Inventory']
    * #swagger.summary = 'POST inventory item'
    * #swagger.description = 'Operation forbidden'
-   * #swagger.parameters['obj'] = {
-       in: 'body',
-       description: 'Inventory object',
-       schema: { $ref: '#/definitions/Inventory' }
-   }
    */
   res.statusCode = 403;
   res.end(`POST operation not supported on /inventory/${req.params.itemId}`);
@@ -103,9 +93,9 @@ router.put('/:itemId', (req, res, next) => {
     * #swagger.summary = 'PUT specified inventory item'
     * #swagger.description = 'Update specified inventory item with new values'
     * #swagger.parameters['obj'] = {
-           in: 'body',
-           description: 'Inventory object',
-           schema: { $ref: '#/definitions/Inventory' }
+        in: 'body',
+        description: 'Inventory object',
+        schema: { $ref: '#/definitions/Inventory' }
      }
     */
   inventoryController.updateItem(req.params.itemId, req.body)
