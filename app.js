@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -25,8 +26,8 @@ dotenv.config();
 const connect = mongoose.connect(getMongoUrl());
 console.log(`Connecting to ${process.env.NODE_ENV} enviroment`);
 connect.then(() => {
-	console.log('Connected correctly to server');
-}, (err) => { console.log(err) });
+  console.log('Connected correctly to server');
+}, (err) => console.log(err));
 
 const app = express();
 
@@ -42,9 +43,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // swagger documentation
 if (process.env.NODE_ENV === 'development') {
-	const swaggerUi = require('swagger-ui-express');
-	const swaggerFile = require('./bin/swagger-output.json');
-	app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+  const swaggerUi = require('swagger-ui-express');
+  const swaggerFile = require('./bin/swagger-output.json');
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 }
 
 // add routers
@@ -57,12 +58,12 @@ app.use('/transactions', transactionsRouter);
 app.use('/inventory', inventoryRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((_, __, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res) {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
