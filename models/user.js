@@ -4,10 +4,10 @@ const { ROLES } = require('../constants/roles.js');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const userDefinition = {
-	$firstName: 'Jonel',
-	$lastName: 'Babao',
-	$email: 'mvp@email.com',
-  $role: 'admin'
+  $firstName: 'Jonel',
+  $lastName: 'Babao',
+  $email: 'mvp@email.com',
+  $role: 'admin',
 };
 
 const User = new Schema({

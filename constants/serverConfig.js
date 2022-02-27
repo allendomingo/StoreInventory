@@ -1,4 +1,4 @@
-const DEV_MONGO_URL = 'mongodb://localhost/'; // change this to whatever the mongoose URL is on your local machine 
+const DEV_MONGO_URL = 'mongodb://localhost/storeInventory'; // change this to whatever the mongoose URL is on your local machine
 
 const getMongoUrl = () => {
   switch (process.env.NODE_ENV) {
