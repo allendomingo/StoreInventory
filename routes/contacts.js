@@ -36,6 +36,17 @@ router.post('/', (req, res, next) => {
     .catch((err) => next(err));
 });
 
+router.put('/', (_, res) => {
+  /**
+   * #swagger.tags = ['Contacts']
+   * #swagger.summary = 'PUT contact items'
+   * #swagger.description = 'Operation forbidden'
+   */
+
+  res.statusCode = 403;
+  res.end('PUT operation not supported on /contacts');
+});
+
 router.delete('/', (_, res, next) => {
   /**
    * #swagger.tags = ['Contacts']
@@ -64,6 +75,16 @@ router.get('/:contactId', (req, res, next) => {
       res.json(contact);
     })
     .catch((err) => next(err));
+});
+
+router.post('/:contactId', (req, res) => {
+  /**
+   * #swagger.tags = ['Contacts']
+   * #swagger.summary = 'POST specified contact'
+   * #swagger.description = 'Operation forbidden'
+   */
+  res.statusCode = 403;
+  res.end(`POST operation not supported on /contact/${req.params.contactId}`);
 });
 
 router.put('/:contactId', (req, res, next) => {
