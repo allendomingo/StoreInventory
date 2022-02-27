@@ -7,13 +7,13 @@ router.get('/', (_, res, next) => {
    * #swagger.summary = 'GET contacts listing'
    * #swagger.description = 'Get the whole list of contacts'
    */
-	contactController.getContacts()
-		.then(contacts => {
-			res.statusCode = 200;
-			res.setHeader('Content-Type', 'applicaton/json');
-			res.json(contacts);
-		})
-		.catch((err) => next(err));
+  contactController.getContacts()
+    .then((contacts) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'applicaton/json');
+      res.json(contacts);
+    })
+    .catch((err) => next(err));
 });
 
 router.post('/', (req, res, next) => {
@@ -21,19 +21,19 @@ router.post('/', (req, res, next) => {
    * #swagger.tags = ['Contacts']
    * #swagger.summary = 'POST contact'
    * #swagger.description = 'Add a contact.
-	 * #swagger.parameters['obj'] = {
-	 		in: 'body',
-	 		description: 'Contact object',
-	 		schema: { $ref: '#/definitions/Contact' }
-	 }
+   * #swagger.parameters['obj'] = {
+       in: 'body',
+       description: 'Contact object',
+       schema: { $ref: '#/definitions/Contact' }
+   }
    */
-	contactController.createContact(req.body)
-		.then(contact => {
-			res.statusCode = 200;
-			res.setHeader('Content-Type', 'applicaton/json');
-			res.json(contact);
-		})
-		.catch((err) => next(err));
+  contactController.createContact(req.body)
+    .then((contact) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'applicaton/json');
+      res.json(contact);
+    })
+    .catch((err) => next(err));
 });
 
 router.delete('/', (_, res, next) => {
@@ -42,13 +42,13 @@ router.delete('/', (_, res, next) => {
    * #swagger.summary = 'DELETE contacts listing'
    * #swagger.description = 'Delete all contacts.
    */
-	contactController.deleteContacts()
-		.then(resp => {
-			res.statusCode = 200;
-			res.setHeader('Content-Type', 'applicaton/json');
-			res.json(resp);
-		})
-		.catch((err) => next(err));
+  contactController.deleteContacts()
+    .then((resp) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'applicaton/json');
+      res.json(resp);
+    })
+    .catch((err) => next(err));
 });
 
 router.get('/:contactId', (req, res, next) => {
@@ -57,13 +57,13 @@ router.get('/:contactId', (req, res, next) => {
    * #swagger.summary = 'GET specified contact'
    * #swagger.description = 'Get a specified contact based on id'
    */
-	contactController.getContact(req.params.contactId)
-		.then(contact => {
-			res.statusCode = 200;
-			res.setHeader('Content-Type', 'applicaton/json');
-			res.json(contact);
-		})
-		.catch((err) => next(err));
+  contactController.getContact(req.params.contactId)
+    .then((contact) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'applicaton/json');
+      res.json(contact);
+    })
+    .catch((err) => next(err));
 });
 
 router.put('/:contactId', (req, res, next) => {
@@ -72,18 +72,18 @@ router.put('/:contactId', (req, res, next) => {
    * #swagger.summary = 'PUT specified contact'
    * #swagger.description = 'Update specified contact with new values'
    * #swagger.parameters['obj'] = {
-	 		in: 'body',
-	 		description: 'Contact object',
-	 		schema: { $ref: '#/definitions/Contact' }
-	 }
+       in: 'body',
+       description: 'Contact object',
+       schema: { $ref: '#/definitions/Contact' }
+   }
    */
-	contactController.updateContact(req.params.contactId, req.body)
-		.then(updatedContact => {
-			res.statusCode = 200;
-			res.setHeader('Content-Type', 'applicaton/json');
-			res.json(updatedContact);
-		})
-		.catch((err) => next(err));
+  contactController.updateContact(req.params.contactId, req.body)
+    .then((updatedContact) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'applicaton/json');
+      res.json(updatedContact);
+    })
+    .catch((err) => next(err));
 });
 
 router.delete('/:contactId', (req, res, next) => {
@@ -92,13 +92,13 @@ router.delete('/:contactId', (req, res, next) => {
    * #swagger.summary = 'DELETE specified contact'
    * #swagger.description = 'Delete a specified contact based on id'
    */
-	contactController.deleteContact(req.params.contactId)
-		.then(resp => {
-			res.statusCode = 200;
-			res.setHeader('Content-Type', 'applicaton/json');
-			res.json(resp);
-		})
-		.catch((err) => next(err));
+  contactController.deleteContact(req.params.contactId)
+    .then((resp) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'applicaton/json');
+      res.json(resp);
+    })
+    .catch((err) => next(err));
 });
 
 module.exports = router;

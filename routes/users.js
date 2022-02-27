@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-router.get('/', function(req, res) {
+router.get('/', (_, res) => {
   /**
    * #swagger.tags = ['Users']
    * #swagger.summary = 'GET users listing'
