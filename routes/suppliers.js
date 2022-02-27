@@ -38,6 +38,17 @@ router.post('/', (req, res, next) => {
     .catch((err) => next(err));
 });
 
+router.put('/', (_, res) => {
+  /**
+   * #swagger.tags = ['Suppliers']
+   * #swagger.summary = 'PUT supplier'
+   * #swagger.description = 'Operation forbidden'
+   */
+
+  res.statusCode = 403;
+  res.end('PUT operation not supported on /suppliers');
+});
+
 router.delete('/', (_, res, next) => {
   /**
    * #swagger.tags = ['Suppliers']
@@ -67,6 +78,16 @@ router.get('/:supplierId', (req, res, next) => {
       res.json(supplier);
     })
     .catch((err) => next(err));
+});
+
+router.post('/:supplierId', (req, res) => {
+  /**
+   * #swagger.tags = ['Suppliers']
+   * #swagger.summary = 'POST specified supplier'
+   * #swagger.description = 'Operation forbidden'
+   */
+  res.statusCode = 403;
+  res.end(`POST operation not supported on /suppliers/${req.params.supplierId}`);
 });
 
 router.put('/:supplierId', (req, res, next) => {
