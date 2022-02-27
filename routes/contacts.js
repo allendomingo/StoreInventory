@@ -97,6 +97,9 @@ router.put('/:contactId', (req, res, next) => {
       schema: { $ref: '#/definitions/Contact' }
     }
   */
+    
+
+  const testFailEsLint = 0
   contactController.updateContact(req.params.contactId, req.body)
     .then((updatedContact) => {
       res.statusCode = 200;
