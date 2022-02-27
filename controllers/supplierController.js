@@ -1,15 +1,15 @@
 const Suppliers = require('../models/supplier').model;
 const contactController = require('./contactController');
 
-exports.getSuppliers = function () {
+exports.getSuppliers = function getSuppliers() {
   return Suppliers.find({}).populate('contacts');
 };
 
-exports.getSupplier = function (supplierId) {
+exports.getSupplier = function getSupplier(supplierId) {
   return Suppliers.findById(supplierId).populate('contacts');
 };
 
-exports.createSupplier = function (newSupplier) {
+exports.createSupplier = function createSupplier(newSupplier) {
   const { contacts } = newSupplier;
 
   if (contacts.length === 0) {
@@ -27,7 +27,7 @@ exports.createSupplier = function (newSupplier) {
     ));
 };
 
-exports.updateSupplier = function (supplierId, updateParams) {
+exports.updateSupplier = function updateSupplier(supplierId, updateParams) {
   if (updateParams.contacts && updateParams.contacts.length > 0) {
     return contactController.createContacts(updateParams.contacts)
       .then((parsedContacts) => {
@@ -50,10 +50,10 @@ exports.updateSupplier = function (supplierId, updateParams) {
   ).populate('contacts');
 };
 
-exports.deleteSuppliers = function () {
+exports.deleteSuppliers = function deleteSuppliers() {
   return Suppliers.deleteMany({});
 };
 
-exports.deleteSupplier = function (supplierId) {
+exports.deleteSupplier = function deleteSupplier(supplierId) {
   return Suppliers.findByIdAndRemove(supplierId);
 };

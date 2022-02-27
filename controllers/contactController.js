@@ -1,20 +1,20 @@
 const Contacts = require('../models/contact').model;
 
-exports.getContacts = function () {
+exports.getContacts = function getContacts() {
   return Contacts.find({}).populate('contacts');
 };
 
-exports.getContact = function (contactId) {
+exports.getContact = function getContact(contactId) {
   return Contacts.findById(contactId);
 };
 
-exports.findContacts = function (filters) {
+exports.findContacts = function findContacts(filters) {
   return Contacts.find(filters);
 };
 
 // creates new contacts, and checks if that contact already exists
 // does not update existing contacts if passed contact is different
-exports.createContacts = function (contacts) {
+exports.createContacts = function createContacts(contacts) {
   if (!contacts || contacts.length === 0) {
     return Promise.resolve([]);
   }
@@ -43,11 +43,11 @@ exports.createContacts = function (contacts) {
     });
 };
 
-exports.createContact = function (contact) {
+exports.createContact = function createContact(contact) {
   return Contacts.create(contact);
 };
 
-exports.updateContact = function (contactId, updateParams) {
+exports.updateContact = function updateContact(contactId, updateParams) {
   return Contacts.findByIdAndUpdate(
     contactId,
     { $set: updateParams },
@@ -55,10 +55,10 @@ exports.updateContact = function (contactId, updateParams) {
   );
 };
 
-exports.deleteContacts = function () {
+exports.deleteContacts = function deleteContacts() {
   return Contacts.deleteMany({});
 };
 
-exports.deleteContact = function (contactId) {
+exports.deleteContact = function deleteContact(contactId) {
   return Contacts.findByIdAndRemove(contactId);
 };

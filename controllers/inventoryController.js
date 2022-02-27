@@ -1,22 +1,22 @@
 const Inventory = require('../models/inventory').model;
 
-exports.getItems = function (params) {
+exports.getItems = function getItems(params) {
   return Inventory.find(params);
 };
 
-exports.getItem = function (itemId) {
+exports.getItem = function getItem(itemId) {
   return Inventory.findById(itemId);
 };
 
-exports.createItem = function (item) {
+exports.createItem = function createItem(item) {
   return Inventory.create(item);
 };
 
-exports.deleteItems = function () {
+exports.deleteItems = function deleteItems() {
   return Inventory.deleteMany({});
 };
 
-exports.updateItem = function (itemId, updateParams) {
+exports.updateItem = function updateItem(itemId, updateParams) {
   return Inventory.findByIdAndUpdate(
     itemId,
     { $set: updateParams },
@@ -24,6 +24,6 @@ exports.updateItem = function (itemId, updateParams) {
   );
 };
 
-exports.deleteItem = function (itemId) {
+exports.deleteItem = function deleteItem(itemId) {
   return Inventory.findByIdAndRemove(itemId);
 };
