@@ -13,5 +13,5 @@ const getMongoUrl = () => {
 
 module.exports = {
   getMongoUrl,
-  secretKey: '12345-67890-09876-54321'
+  secretKey: '12345-67890-09876-54321',
 };
