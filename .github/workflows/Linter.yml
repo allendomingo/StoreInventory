@@ -33,8 +33,9 @@ jobs:
     - name: Install Dependencies
       run: yarn
     - name: Run ESLint
-      eslint-args: '--ignore-path=.gitignore --quiet'
-      extensions: 'js,jsx,ts,tsx'
+      with:
+        eslint-args: '--ignore-path=.gitignore --quiet'
+        extensions: 'js,jsx,ts,tsx'
       run: |
         mkdir -p ~/reports/
         yarn run eslint
