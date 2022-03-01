@@ -8,7 +8,7 @@ const imports = {
 
 const models = {};
 const definitions = {
-	TransactionInputDTO: require('./transaction.js').transactionInputDTO,
+  TransactionInputDTO: require('./transaction').transactionInputDTO,
 };
 
 Object.entries(imports).forEach(([key, value]) => {
