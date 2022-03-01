@@ -1,9 +1,9 @@
 const imports = {
-	Contact: require('./contact.js'),
-	Supplier: require('./supplier.js'),
-	Transaction: require('./transaction.js'),
-	Inventory: require('./inventory.js'),
-	User: require('./user.js'),
+  Contact: require('./contact'),
+  Supplier: require('./supplier'),
+  Transaction: require('./transaction'),
+  Inventory: require('./inventory'),
+  User: require('./user'),
 };
 
 const models = {};
@@ -12,11 +12,11 @@ const definitions = {
 };
 
 Object.entries(imports).forEach(([key, value]) => {
-	models[key] = value.model;
-	definitions[key] = value.definition;
+  models[key] = value.model;
+  definitions[key] = value.definition;
 });
 
 module.exports = {
-	models,
-	definitions,
+  models,
+  definitions,
 };
