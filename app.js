@@ -46,6 +46,7 @@ app.use(passport.initialize());
 // swagger documentation
 if (process.env.NODE_ENV === 'development') {
   const swaggerUi = require('swagger-ui-express');
+  // eslint-disable-next-line import/no-unresolved
   const swaggerFile = require('./bin/swagger-output.json');
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 }

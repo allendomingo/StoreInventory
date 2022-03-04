@@ -1,4 +1,6 @@
-var express = require('express');
+/* eslint-disable no-tabs */
+/* eslint-disable max-len */
+const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('./cors');
 const authenticate = require('../authenticate');
@@ -7,13 +9,13 @@ const userController = require('../controllers/userController');
 
 const { ROLES } = require('../constants/roles');
 
-var router = express.Router();
+const router = express.Router();
 
 router.use(bodyParser.json());
 
 // NOTE: Better to test this on postman. Swagger is just for documentation (might not be authenticated)
 
-router.get('/', cors.corsWithOption, authenticate.verifyUser, authenticate.verifyRoles([ROLES.manager, ROLES.admin]), function(req, res, next) {
+router.get('/', cors.corsWithOption, authenticate.verifyUser, authenticate.verifyRoles([ROLES.manager, ROLES.admin]), (req, res, next) => {
   /**
    * #swagger.tags = ['User']
    * #swagger.summary = 'GET users listing'
@@ -21,16 +23,16 @@ router.get('/', cors.corsWithOption, authenticate.verifyUser, authenticate.verif
    */
 
   userController.getUsers(req.query)
-  .then(users => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json(users);
-  }, err => next(err))
-  .catch(err => next(err));
+    .then((users) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(users);
+    }, (err) => next(err))
+    .catch((err) => next(err));
 });
 
 router.post('/', (_, res) => {
-   /**
+  /**
  * #swagger.tags = ['User']
  * #swagger.summary = 'POST users'
  */
@@ -40,7 +42,7 @@ router.post('/', (_, res) => {
 });
 
 router.put('/', (_, res) => {
-   /**
+  /**
  * #swagger.tags = ['User']
  * #swagger.summary = 'PUT users'
  */
@@ -49,14 +51,14 @@ router.put('/', (_, res) => {
   res.end('PUT operation not supported on /users');
 });
 
-router.delete('/',  authenticate.verifyUser, authenticate.verifyRoles([ROLES.manager, ROLES.admin]), (req, res, next) => {
+router.delete('/', authenticate.verifyUser, authenticate.verifyRoles([ROLES.manager, ROLES.admin]), (req, res, next) => {
   /**
  * #swagger.tags = ['User']
  * #swagger.summary = 'DELETE users'
  * #swagger.description = 'Delete users'.
  */
   userController.deleteUsers(req.body.ids)
-    .then(resp => {
+    .then((resp) => {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'applicaton/json');
       res.json(resp);
@@ -64,9 +66,9 @@ router.delete('/',  authenticate.verifyUser, authenticate.verifyRoles([ROLES.man
     .catch((err) => next(err));
 });
 
-/*=====================================================================================================*/ 
+/*= ==================================================================================================== */
 
-router.get('/signup', cors.corsWithOption, function(req, res) {
+router.get('/signup', cors.corsWithOption, (req, res) => {
   /**
   * #swagger.tags = ['User']
   * #swagger.summary = 'GET signup'
@@ -76,7 +78,7 @@ router.get('/signup', cors.corsWithOption, function(req, res) {
   res.end('GET operation not supported on /users/signup');
 });
 
-router.post('/signup', cors.corsWithOption, function(req, res) {
+router.post('/signup', cors.corsWithOption, (req, res) => {
   /**
  * #swagger.tags = ['User']
  * #swagger.summary = 'POST signup user'
@@ -90,7 +92,7 @@ router.post('/signup', cors.corsWithOption, function(req, res) {
   userController.registerUser(req, res);
 });
 
-router.put('/signup', cors.corsWithOption, function(req, res) {
+router.put('/signup', cors.corsWithOption, (req, res) => {
   /**
   * #swagger.tags = ['User']
   * #swagger.summary = 'PUT signup'
@@ -100,7 +102,7 @@ router.put('/signup', cors.corsWithOption, function(req, res) {
   res.end('PUT operation not supported on /users/signup');
 });
 
-router.delete('/signup', cors.corsWithOption, function(req, res) {
+router.delete('/signup', cors.corsWithOption, (req, res) => {
   /**
   * #swagger.tags = ['User']
   * #swagger.summary = 'DELETE signup'
@@ -110,9 +112,9 @@ router.delete('/signup', cors.corsWithOption, function(req, res) {
   res.end('DELETE operation not supported on /users/signup');
 });
 
-/*=====================================================================================================*/ 
+/*= ==================================================================================================== */
 
-router.get('/login', cors.corsWithOption, function(req, res) {
+router.get('/login', cors.corsWithOption, (req, res) => {
   /**
   * #swagger.tags = ['User']
   * #swagger.summary = 'GET login'
@@ -136,7 +138,7 @@ router.post('/login', cors.corsWithOption, (req, res, next) => {
   userController.loginUser(req, res, next);
 });
 
-router.put('/login', cors.corsWithOption, function(req, res) {
+router.put('/login', cors.corsWithOption, (req, res) => {
   /**
   * #swagger.tags = ['User']
   * #swagger.summary = 'PUT login'
@@ -146,7 +148,7 @@ router.put('/login', cors.corsWithOption, function(req, res) {
   res.end('PUT operation not supported on /users/login');
 });
 
-router.delete('/login', cors.corsWithOption, function(req, res) {
+router.delete('/login', cors.corsWithOption, (req, res) => {
   /**
   * #swagger.tags = ['User']
   * #swagger.summary = 'DELETE login'
@@ -156,10 +158,10 @@ router.delete('/login', cors.corsWithOption, function(req, res) {
   res.end('DELETE operation not supported on /users/login');
 });
 
-/*=====================================================================================================*/ 
+/*= ==================================================================================================== */
 
-router.get('/:userId', cors.corsWithOption, authenticate.verifyUser, authenticate.verifyRoles([ROLES.manager, ROLES.admin]), function(req, res, next) {
-   /**
+router.get('/:userId', cors.corsWithOption, authenticate.verifyUser, authenticate.verifyRoles([ROLES.manager, ROLES.admin]), (req, res, next) => {
+  /**
    * #swagger.tags = ['User']
    * #swagger.summary = 'POST user item'
    * #swagger.description = 'GET specific user details'
@@ -170,15 +172,15 @@ router.get('/:userId', cors.corsWithOption, authenticate.verifyUser, authenticat
 	 }
    */
   userController.getUser(req.params.userId)
-    .then(user => {
+    .then((user) => {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.json(user);
-    }, err => next(err))
-    .catch(err => next(err));
+    }, (err) => next(err))
+    .catch((err) => next(err));
 });
 
-router.post('/:userId', cors.corsWithOption, authenticate.verifyUser, function(req, res) {
+router.post('/:userId', cors.corsWithOption, authenticate.verifyUser, (req, res) => {
   /**
   * #swagger.tags = ['User']
   * #swagger.summary = 'POST user'
@@ -188,7 +190,7 @@ router.post('/:userId', cors.corsWithOption, authenticate.verifyUser, function(r
   res.end('POST operation not supported on /users/:userId');
 });
 
-router.put('/:userId', cors.corsWithOption, authenticate.verifyUser, authenticate.verifyRoles([ROLES.manager, ROLES.admin]), function(req, res, next) {
+router.put('/:userId', cors.corsWithOption, authenticate.verifyUser, authenticate.verifyRoles([ROLES.manager, ROLES.admin]), (req, res, next) => {
   /**
    * #swagger.tags = ['User']
    * #swagger.summary = 'PUT user'
@@ -200,15 +202,15 @@ router.put('/:userId', cors.corsWithOption, authenticate.verifyUser, authenticat
 	 }
    */
   userController.updateUser(req.params.userId, req.body)
-    .then(user => {
+    .then((user) => {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.json(user);
-    }, err => next(err))
-    .catch(err => next(err));
+    }, (err) => next(err))
+    .catch((err) => next(err));
 });
 
-router.delete('/:userId', cors.corsWithOption, authenticate.verifyUser, authenticate.verifyRoles([ROLES.admin]), function(req, res, next) {
+router.delete('/:userId', cors.corsWithOption, authenticate.verifyUser, authenticate.verifyRoles([ROLES.admin]), (req, res, next) => {
   /**
    * #swagger.tags = ['User']
    * #swagger.summary = 'DELETE user'
@@ -220,13 +222,12 @@ router.delete('/:userId', cors.corsWithOption, authenticate.verifyUser, authenti
 	 }
    */
   userController.deleteUser(req.params.userId)
-    .then(user => {
+    .then((user) => {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.json(user);
-    }, err => next(err))
-    .catch(err => next(err));
+    }, (err) => next(err))
+    .catch((err) => next(err));
 });
-
 
 module.exports = router;
