@@ -20,7 +20,7 @@ const supplierSchema = new mongoose.Schema({
   },
   contacts: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Contact'
+    ref: 'Contact',
   }],
   brands: {
     type: [String],
