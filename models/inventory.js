@@ -1,14 +1,13 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
 
 const inventoryDefinition = {
-	$name: 'Pan de Coco',
-	manufacturer: 'All3n\'s Bakery',
-	category: 'Sweet stuff',
-  $quantity: 10
+  $name: 'Pan de Coco',
+  manufacturer: 'All3n\'s Bakery',
+  category: 'Sweet stuff',
+  $quantity: 10,
 };
 
-const inventorySchema = new Schema({
+const inventorySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -26,15 +25,15 @@ const inventorySchema = new Schema({
     required: true,
     default: 0,
   },
-},{
-    timestamps: true,
-})
+}, {
+  timestamps: true,
+});
 
-inventorySchema.index({'name': 1, 'manufacturer': 1, 'category': 1}, {unique: true});
+inventorySchema.index({ name: 1, manufacturer: 1, category: 1 }, { unique: true });
 
-const Inventory = mongoose.model('Inventory', inventorySchema)
+const Inventory = mongoose.model('Inventory', inventorySchema);
 
 module.exports = {
-	model: Inventory,
-	definition: inventoryDefinition,
+  model: Inventory,
+  definition: inventoryDefinition,
 };

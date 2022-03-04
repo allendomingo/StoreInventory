@@ -1,20 +1,18 @@
 const mongoose = require('mongoose');
-const { CONTACTTYPES } = require('../constants/contactTypes.js')
-const Schema = mongoose.Schema;
 
 const ContactTypes = Object.freeze({
-	supplier: 'Supplier',
-	customer: 'Customer',
+  supplier: 'Supplier',
+  customer: 'Customer',
 });
 
 const contactDefinition = {
-	$name: 'Juan dela Cruz',
-	numbers: ['0900XXXXXXX'],
-	emails: ['juandelacruz@email.com'],
-	$contactType: [ContactTypes.customer],
+  $name: 'Juan dela Cruz',
+  numbers: ['0900XXXXXXX'],
+  emails: ['juandelacruz@email.com'],
+  $contactType: [ContactTypes.customer],
 };
 
-const contactSchema = new Schema({
+const contactSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -28,21 +26,20 @@ const contactSchema = new Schema({
   },
   contactType: {
     type: [String],
-		enum: Object.values(ContactTypes),
+    enum: Object.values(ContactTypes),
     required: true,
-    enum: Object.values(CONTACTTYPES),
-  }
-},{
-    timestamps: true,
+  },
+}, {
+  timestamps: true,
 });
 
 Object.assign(contactSchema.statics, {
-	ContactTypes,
+  ContactTypes,
 });
 
 const Contact = mongoose.model('Contact', contactSchema);
 
 module.exports = {
-	model: Contact,
-	definition: contactDefinition,
+  model: Contact,
+  definition: contactDefinition,
 };
