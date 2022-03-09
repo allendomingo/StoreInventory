@@ -1,5 +1,6 @@
 const imports = {
   Contact: require('./contact'),
+  Customer: require('./customer'),
   Supplier: require('./supplier'),
   Transaction: require('./transaction'),
   Inventory: require('./inventory'),

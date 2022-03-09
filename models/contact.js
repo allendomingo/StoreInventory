@@ -24,7 +24,6 @@ const contactSchema = new mongoose.Schema({
   emails: {
     type: [String],
   },
-  // Differentiate between supplier, customer, etc.
   contactType: {
     type: [String],
     enum: Object.values(ContactTypes),
