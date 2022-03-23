@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const passport = require('passport');
 
 // routers
 const indexRouter = require('./routes/index');
@@ -40,10 +41,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 // swagger documentation
 if (process.env.NODE_ENV === 'development') {
   const swaggerUi = require('swagger-ui-express');
+  // eslint-disable-next-line import/no-unresolved
   const swaggerFile = require('./bin/swagger-output.json');
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 }
