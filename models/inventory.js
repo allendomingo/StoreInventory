@@ -5,6 +5,7 @@ const inventoryDefinition = {
   manufacturer: 'All3n\'s Bakery',
   category: 'Sweet stuff',
   $quantity: 10,
+  $srp: 8,
 };
 
 const inventorySchema = new mongoose.Schema({
@@ -23,7 +24,10 @@ const inventorySchema = new mongoose.Schema({
   quantity: {
     type: Number,
     required: true,
-    default: 0,
+  },
+  srp: {
+    type: Number,
+    required: true,
   },
 }, {
   timestamps: true,

@@ -1,15 +1,16 @@
-const Contacts = require('../models/contact').model;
+const { ObjectId } = require('mongodb');
+const { Contact } = require('../models').models;
 
 exports.getContacts = function getContacts() {
-  return Contacts.find({}).populate('contacts');
+  return Contact.find({}).populate('contacts');
 };
 
 exports.getContact = function getContact(contactId) {
-  return Contacts.findById(contactId);
+  return Contact.findById(contactId);
 };
 
 exports.findContacts = function findContacts(filters) {
-  return Contacts.find(filters);
+  return Contact.find(filters);
 };
 
 // creates new contacts, and checks if that contact already exists
@@ -19,10 +20,10 @@ exports.createContacts = function createContacts(contacts) {
     return Promise.resolve([]);
   }
 
-  // need to check if contact/s already exist
   const parsedContacts = [];
-  const contactNameFilters = contacts.map(({ name }) => ({ name }));
 
+  // need to check if contact/s already exist
+  const contactNameFilters = contacts.map(({ name }) => ({ name }));
   return this.findContacts({ $or: contactNameFilters })
     .then((existingContacts) => {
       existingContacts.forEach(({ _id }) => parsedContacts.push(_id));
@@ -33,7 +34,7 @@ exports.createContacts = function createContacts(contacts) {
       if (newContacts.length === 0) {
         return Promise.resolve(null);
       }
-      return Contacts.create(newContacts);
+      return Contact.create(newContacts);
     })
     .then((newContacts) => {
       if (newContacts) {
@@ -44,11 +45,11 @@ exports.createContacts = function createContacts(contacts) {
 };
 
 exports.createContact = function createContact(contact) {
-  return Contacts.create(contact);
+  return Contact.create(contact);
 };
 
 exports.updateContact = function updateContact(contactId, updateParams) {
-  return Contacts.findByIdAndUpdate(
+  return Contact.findByIdAndUpdate(
     contactId,
     { $set: updateParams },
     { new: true },
@@ -56,9 +57,45 @@ exports.updateContact = function updateContact(contactId, updateParams) {
 };
 
 exports.deleteContacts = function deleteContacts() {
-  return Contacts.deleteMany({});
+  return Contact.deleteMany({});
 };
 
 exports.deleteContact = function deleteContact(contactId) {
-  return Contacts.findByIdAndRemove(contactId);
+  return Contact.findByIdAndRemove(contactId);
+};
+
+exports.separateContacts = function separateContacts(contacts) {
+  // separate contact ids and  objects
+  const contactIds = [];
+  const newContactObjects = [];
+
+  contacts.forEach((contact) => {
+    if (ObjectId.isValid(contact) && ObjectId(contact).toString() === contact) {
+      contactIds.push(contact);
+    } else { // assume contact object if not id
+      newContactObjects.push(contact);
+    }
+  });
+
+  // check if contact id's exist
+  const parsedContactIds = this.findContacts({
+    $or: contactIds.map((_id) => ({ _id })),
+  }).then((existingContacts) => {
+    const existingContactIds = existingContacts.map(({ _id }) => _id.toString());
+
+    // check if all contact ids were found
+    if (existingContactIds.length !== contactIds.length) {
+      const missingContactIds = contactIds.filter((id) => !existingContactIds.includes(id));
+      return Promise.reject(new Error(
+        `Contacts with the following ids were not found: ${missingContactIds.join(', ')}`,
+      ));
+    }
+
+    return Promise.resolve(existingContactIds);
+  });
+
+  // create new contacts
+  const newContacts = this.createContacts(newContactObjects);
+
+  return Promise.all([parsedContactIds, newContacts]);
 };

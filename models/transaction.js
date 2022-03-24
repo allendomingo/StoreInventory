@@ -16,11 +16,19 @@ const Types = Object.freeze({
   loan: 'Loan',
 });
 
+const Methods = Object.freeze({
+  cash: 'Cash',
+  gCash: 'GCash',
+  check: 'Check',
+  bankTransfer: 'Bank bankTransfer',
+  etc: 'etc',
+});
+
 // Sample purchase order transaction, pending for manager's approval
 const transactionDefinition = {
   $status: Statuses.pendingApproval,
   $date: '2022-01-26',
-  $buyer: '<Insert Name of your company here>',
+  $buyer: { $ref: '#/definitions/Customer' },
   $seller: { $ref: '#/definitions/Supplier' },
   $type: Types.purchase,
   $secondaryType: 'PO',
@@ -34,12 +42,40 @@ const transactionDefinition = {
     $discountedAmount: 15607.80,
   }],
   $totalAmount: 15607.80,
+  discount: 0,
+  $finalAmount: 15607.80,
+  withholdingTax: null,
+  paymentAmount: null,
+  paymentMethod: null,
+  remarks: 'Need to replace broken mouse',
+};
+
+// Sample
+const transactionInputDTODefinition = {
+  $status: Statuses.pendingDelivery,
+  $date: '2022-02-10',
+  $buyer: 'Customer ObjectId',
+  $seller: 'Supplier ObjectId',
+  $type: Types.purchase,
+  $secondaryType: 'PO',
+  $number: 1337,
+  $rows: [{
+    $itemId: 'Inventory ObjectId',
+    $unitPrice: 8671,
+    $quantity: 2,
+    discount: 10,
+  }],
+  discount: 0,
+  withholdingTax: null,
+  paymentAmount: null,
+  paymentMethod: null,
   remarks: 'Need to replace broken mouse',
 };
 
 const transactionRowSchema = new mongoose.Schema({
   itemId: {
-    type: String, // TODO: Update to use inventory item object id
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Inventory',
     required: true,
   },
   unitPrice: {
@@ -58,7 +94,7 @@ const transactionRowSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  discountedAmount: { // effectively the final amount for the row
+  rowAmount: {
     type: Number,
     required: true,
   },
@@ -81,12 +117,10 @@ const transactionSchema = new mongoose.Schema({
   buyer: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Customer',
-    required: true,
   },
   seller: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Supplier',
-    required: true,
   },
   type: {
     type: String,
@@ -110,6 +144,9 @@ const transactionSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  finalAmount: {
+    type: Number,
+  },
   paymentAmount: {
     type: Number,
   },
@@ -119,7 +156,8 @@ const transactionSchema = new mongoose.Schema({
   },
   paymentMethod: {
     type: String,
-    default: 'Cash',
+    enum: Object.values(Methods),
+    default: Methods.cash,
   },
   remarks: {
     type: String,
@@ -130,7 +168,7 @@ const transactionSchema = new mongoose.Schema({
 });
 
 Object.assign(transactionSchema.statics, {
-  Statuses, Types,
+  Statuses, Types, Methods,
 });
 
 const Transaction = mongoose.model('Transaction', transactionSchema);
@@ -138,4 +176,5 @@ const Transaction = mongoose.model('Transaction', transactionSchema);
 module.exports = {
   model: Transaction,
   definition: transactionDefinition,
+  transactionInputDTO: transactionInputDTODefinition,
 };
