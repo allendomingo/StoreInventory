@@ -8,6 +8,7 @@ An inventory system to aid in managing stock, reducing costs, and in accounting.
 - Export tables and charts to .xlsx and .pdf
 
 ## Architecture
+- MVC
 - Rest API framework using Express.js.
 - MongoDB Atlas (free) will be used as the database.
 - ReactJs for FE
