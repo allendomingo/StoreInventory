@@ -24,5 +24,5 @@ Recommended Practices:
 
 ## Resources:
 General JS Coding Styleguide: https://google.github.io/styleguide/jsguide.html
-Swagger Documentation: http://<app_host>:<app_port>/api-docs (ie. http://localhost:3000/api-docs)
+Swagger Documentation: http://<app_host>:<app_port>/api-docs (ie. http://localhost:4200/api-docs)
 Controller and Routes: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes

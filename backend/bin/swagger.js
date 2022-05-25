@@ -10,7 +10,7 @@ const doc = {
       name: 'Allen Domingo',
     },
   },
-  host: 'localhost:3000',
+  host: 'localhost:3443',
   schemes: ['http'],
   definitions,
 };
