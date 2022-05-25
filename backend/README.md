@@ -1,4 +1,4 @@
-# Overview
+# BE Overview
 Backend server Node.js codebase for StoreInventory system
 
 ## Architecture
@@ -8,7 +8,12 @@ Backend server Node.js codebase for StoreInventory system
 - Route-Controller-Service
 
 ## Dev
-Process:
+Commands:
+- npm run <command> or yarn run <command>
+- 'dev' command: run server in development mode w/ swagger documentation
+- 'start' command: run server in production mode w/o swagger documentation
+
+Processes:
 - Take issue from backlog, and place in the To Do column. Add estimate (in labels) if missing.
 - Move to the In Progress column when starting work on it.
 - When making a PR, make sure to link it to the relevant issue. Move to the linked issue to the For Review/Merging column.
