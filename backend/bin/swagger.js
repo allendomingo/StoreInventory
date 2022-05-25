@@ -10,7 +10,7 @@ const doc = {
       name: 'Allen Domingo',
     },
   },
-  host: 'localhost:3443',
+  host: `localhost:${process.env.PORT}`,
   schemes: ['http'],
   definitions,
 };
