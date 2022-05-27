@@ -8,6 +8,7 @@ An inventory system to aid in managing stock, reducing costs, and in accounting.
 - Export tables and charts to .xlsx and .pdf
 
 ## Architecture
+- MVC
 - Rest API framework using Express.js.
 - MongoDB Atlas (free) will be used as the database.
 - ReactJs for FE
@@ -28,7 +29,10 @@ Recommended Practices:
 - multiple commits is preferred to a singular one for a PR when the changes are large
 
 BE:
-- Do not place the logic (or the majority of it at least) in the router file itself. Place it in functions in a service file (ie. a leadersService with the functions, to be used in the leadersRouter for the /leaders endpoint)
+- change directory to within /backend to be able to work on it (eg. git, npm, yarn, etc.)
+
+FE:
+- change directory to within /frontend to be able to work on it (eg. git, npm, yarn, etc.)
 
 ## Starting Out (from scratch)
 1. Install git bash ([download link](https://git-scm.com/downloads)).
@@ -41,4 +45,4 @@ BE:
 
 ## Resources:
 General JS Coding Styleguide: https://google.github.io/styleguide/jsguide.html
-Swagger Documentation: http://<app_host>:<app_port>/api-docs (ie. http://localhost:3000/api-docs)
+Swagger Documentation: http://<app_host>:<app_port>/api-docs (ie. http://localhost:4200/api-docs)
