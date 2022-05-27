@@ -1,7 +1,7 @@
 ---
 name: Devops Feature Request
 about: For Environment/devOps features or enhancements
-title: "NET-0000: Feature"
+title: 'NET-0000: Feature'
 labels: enhancement, env
 assignees: ''
 

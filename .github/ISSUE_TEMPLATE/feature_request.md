@@ -1,8 +1,8 @@
 ---
-name: BE Feature Request
-about: For general features or enhancements (unspecified/combined FE/BE/Devops effort)
-title: 'NET-0000: Feature'
-labels: be, enhancement, fe
+name: Feature request
+about: Suggest an idea for this project
+title: " NET-0000: Feature "
+labels: enhancement
 assignees: ''
 
 ---
