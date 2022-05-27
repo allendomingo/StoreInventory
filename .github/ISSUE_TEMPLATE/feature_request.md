@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: " NET-0000: Feature "
+title: 'NET-0000: Feature '
 labels: enhancement
 assignees: ''
 
