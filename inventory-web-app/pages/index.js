@@ -16,8 +16,9 @@ export default function Home() {
   return (
     <>
       <main>
+        <h1>Image</h1>
         <h1>StockFlow</h1>
-        <Radio>fasdasdf</Radio>
+
         <Form
           name="basic"
           labelCol={{ span: 8 }}
@@ -32,7 +33,7 @@ export default function Home() {
             name="username"
             rules={[{ required: true, message: "Please input your username!" }]}
           >
-            <Input prefix={<UserOutlined />} />
+            <Input placeholder="Username" prefix={<UserOutlined />} />
           </Form.Item>
 
           <Form.Item
@@ -40,7 +41,7 @@ export default function Home() {
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
-            <Input.Password prefix={<LockOutlined />} />
+            <Input.Password placeholder="Password" prefix={<LockOutlined />} />
           </Form.Item>
 
           <Form.Item
