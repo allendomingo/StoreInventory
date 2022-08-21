@@ -1,7 +1,9 @@
 name: Codiga
+
 on:
-  push:
-    branches: [ github-fix ]
+  pull_request:
+    branches:
+      - dev
 
 jobs:
   check-quality:

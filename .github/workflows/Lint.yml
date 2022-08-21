@@ -2,9 +2,8 @@ name: Lint
 
 on:
   pull_request:
-  push:
     branches:
-      - github-fix
+      - dev
 
 env:
   node-version: "14.x"
