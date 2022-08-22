@@ -12,8 +12,6 @@ export default function Home() {
     console.log("Failed:", errorInfo);
   };
 
-  console.log("Codiga Test");
-
   return (
     <div className={styles.container}>
       <Head>
