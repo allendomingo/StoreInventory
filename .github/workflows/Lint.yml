@@ -36,7 +36,7 @@ jobs:
         run: yarn
       - name: Run ESLint for backend directory
         working-directory: ./backend
-        run: eslint . --ext .js,.jsx,.ts,.tsx
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
   run-eslint-frontend:
     name: Run eslint in frontend
     runs-on: ubuntu-latest
