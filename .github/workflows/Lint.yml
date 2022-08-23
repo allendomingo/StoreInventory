@@ -32,12 +32,11 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install Dependencies
+        working-directory: ./backend
         run: yarn
-      - uses: sibiraj-s/action-eslint@v2
-        with:
-          eslint-args: '--ignore-path=.gitignore --quiet'
-          extensions: 'js,jsx,ts,tsx'
-          annotations: true
+      - name: Run ESLint for backend directory
+        working-directory: ./backend
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
   run-eslint-frontend:
     name: Run eslint in frontend
     runs-on: ubuntu-latest
@@ -61,6 +60,7 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install Dependencies
+        working-directory: ./inventory-web-app
         run: yarn
       - uses: sibiraj-s/action-eslint@v2
         with:
