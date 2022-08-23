@@ -62,8 +62,6 @@ jobs:
       - name: Install Dependencies
         working-directory: ./inventory-web-app
         run: yarn
-      - uses: sibiraj-s/action-eslint@v2
-        with:
-          eslint-args: '--ignore-path=.gitignore --quiet'
-          extensions: 'js,jsx,ts,tsx'
-          annotations: true
+      - name: Run ESLint for inventory-web-app directory
+        working-directory: ./inventory-web-app
+        run: npx yarn lint
