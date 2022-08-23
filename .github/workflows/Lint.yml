@@ -19,11 +19,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ env.node-version }}
-      - name: Cache node modules
-        id: cache-nodemodules
+      - name: Cache BE node modules
+        id: cache-be-nodemodules
         uses: actions/cache@v2
         env:
-          cache-name: cache-node-modules
+          cache-name: cache-be-node-modules
         with:
           path: backend/node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
@@ -48,11 +48,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ env.node-version }}
-      - name: Cache node modules
-        id: cache-nodemodules
+      - name: Cache FE node modules
+        id: cache-fe-nodemodules
         uses: actions/cache@v2
         env:
-          cache-name: cache-node-modules
+          cache-name: cache-fe-node-modules
         with:
           path: inventory-web-app/node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
