@@ -12,6 +12,7 @@ export default function Home() {
     console.log("Failed:", errorInfo);
   };
   //hello world
+  //hello world 2
   return (
     <div className={styles.container}>
       <Head>
