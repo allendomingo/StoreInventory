@@ -19,11 +19,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ env.node-version }}
-      - name: Cache node modules
-        id: cache-nodemodules
+      - name: Cache BE node modules
+        id: cache-be-nodemodules
         uses: actions/cache@v2
         env:
-          cache-name: cache-node-modules
+          cache-name: cache-be-node-modules
         with:
           path: backend/node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
@@ -32,12 +32,11 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install Dependencies
+        working-directory: ./backend
         run: yarn
-      - uses: sibiraj-s/action-eslint@v2
-        with:
-          eslint-args: '--ignore-path=.gitignore --quiet'
-          extensions: 'js,jsx,ts,tsx'
-          annotations: true
+      - name: Run ESLint for backend directory
+        working-directory: ./backend
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
   run-eslint-frontend:
     name: Run eslint in frontend
     runs-on: ubuntu-latest
@@ -48,11 +47,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ env.node-version }}
-      - name: Cache node modules
-        id: cache-nodemodules
+      - name: Cache FE node modules
+        id: cache-fe-nodemodules
         uses: actions/cache@v2
         env:
-          cache-name: cache-node-modules
+          cache-name: cache-fe-node-modules
         with:
           path: inventory-web-app/node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
@@ -61,9 +60,8 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install Dependencies
+        working-directory: ./inventory-web-app
         run: yarn
-      - uses: sibiraj-s/action-eslint@v2
-        with:
-          eslint-args: '--ignore-path=.gitignore --quiet'
-          extensions: 'js,jsx,ts,tsx'
-          annotations: true
+      - name: Run ESLint for inventory-web-app directory
+        working-directory: ./inventory-web-app
+        run: npx yarn lint
