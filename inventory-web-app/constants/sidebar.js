@@ -6,14 +6,17 @@ import {
   CheckSquareOutlined,
   ToolOutlined,
   CreditCardOutlined,
+  IdcardOutlined
 } from '@ant-design/icons';
+
+const BASE_SIDEMENU_ITEMS = ['home', 'inventory', 'transactions', 'suppliers', 'customers', 'orders', 'repairs']
 
 // Maps what items each role can see
 export const ROLES_TO_VISIBLE_SIDEMENU_ITEMS_MAP = {
-  admin: ['home', 'inventory', 'transactions', 'customers', 'orders', 'repairs', 'audit-center'],
-  manager: ['home', 'inventory', 'transactions', 'customers', 'orders', 'repairs', 'audit-center'],
-  operator: ['home', 'inventory', 'transactions', 'customers', 'orders', 'repairs', 'audit-center'],
-  user: ['home', 'inventory', 'transactions', 'suppliers', 'orders', 'repairs', 'audit-center'],
+  admin: [...BASE_SIDEMENU_ITEMS, 'audit-center', 'accounts-manager'],
+  manager: [...BASE_SIDEMENU_ITEMS, 'audit-center'],
+  operator: [...BASE_SIDEMENU_ITEMS, 'audit-center'],
+  user: BASE_SIDEMENU_ITEMS,
 }
 
 // Add in the object format below if you want to add a menu item to the sidebar
@@ -26,5 +29,6 @@ export const SIDEMENU_ITEMS = [
   { label: 'Customers', key: 'customers', icon: <UserOutlined /> },
   { label: 'Order Service', key: 'orders', icon: <CheckSquareOutlined /> },
   { label: 'Repair Service', key: 'repairs', icon: <ToolOutlined /> },
-  { label: 'Audit Center', key: 'audit-center', icon: <CreditCardOutlined /> }
+  { label: 'Audit Center', key: 'audit-center', icon: <CreditCardOutlined /> },
+  { label: 'Accounts Manager', key: 'accounts-manager', icon: <IdcardOutlined /> }
 ]
