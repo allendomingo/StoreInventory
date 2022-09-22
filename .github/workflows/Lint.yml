@@ -10,7 +10,7 @@ env:
 
 jobs:
   run-eslint-backend:
-    name: Run eslint in backend
+    name: Run eslint in backend directory
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -38,7 +38,7 @@ jobs:
         working-directory: ./backend
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
   run-eslint-frontend:
-    name: Run eslint in frontend
+    name: Run eslint in frontend directory
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -66,7 +66,7 @@ jobs:
         working-directory: ./inventory-web-app
         run: npx yarn lint
   run-eslint-stockpile:
-    name: Run eslint in Stockpile library
+    name: Run eslint in Stockpile directory
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -90,6 +90,6 @@ jobs:
       - name: Install Dependencies
         working-directory: ./stockpile
         run: yarn
-      - name: Run ESLint for stockpile directory
+      - name: Run ESLint for Stockpile directory
         working-directory: ./stockpile
-        run: npx yarn lint
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
