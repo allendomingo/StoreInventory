@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: ${{ env.node-version }}
       - name: Cache BE node modules
-        id: cache-be-nodemodules
+        id: cache-be-node-modules
         uses: actions/cache@v2
         env:
           cache-name: cache-be-node-modules
@@ -48,7 +48,7 @@ jobs:
         with:
           node-version: ${{ env.node-version }}
       - name: Cache FE node modules
-        id: cache-fe-nodemodules
+        id: cache-fe-node-modules
         uses: actions/cache@v2
         env:
           cache-name: cache-fe-node-modules
@@ -64,4 +64,32 @@ jobs:
         run: yarn
       - name: Run ESLint for inventory-web-app directory
         working-directory: ./inventory-web-app
+        run: npx yarn lint
+  run-eslint-stockpile:
+    name: Run eslint in Stockpile library
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.node-version }}
+      - name: Cache Stockpile node modules
+        id: cache-stockpile-node-modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-stockpile-node-modules
+        with:
+          path: stockpile/node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install Dependencies
+        working-directory: ./stockpile
+        run: yarn
+      - name: Run ESLint for stockpile directory
+        working-directory: ./stockpile
         run: npx yarn lint
