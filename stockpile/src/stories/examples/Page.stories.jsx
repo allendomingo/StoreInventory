@@ -12,7 +12,7 @@ export default {
   },
 };
 
-const Template = (args) => <Page {...args} />;
+const Template = (args) => <Page {...args} />; // eslint-disable-line
 
 // More on interaction testing: https://storybook.js.org/docs/react/writing-tests/interaction-testing
 export const LoggedOut = Template.bind({});
