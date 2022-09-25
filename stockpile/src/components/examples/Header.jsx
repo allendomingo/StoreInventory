@@ -2,13 +2,46 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from 'components/examples/Button/Button';
-import './header.css';
+import styled from '@emotion/styled';
+
+const Wrapper = styled.div`
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  svg {
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  h1 {
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 1;
+    margin: 6px 0 6px 10px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  button + button {
+    margin-left: 10px;
+  }
+
+  .welcome {
+    color: #333;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+`;
 
 const Header = ({
   user, onLogin, onLogout, onCreateAccount,
 }) => (
   <header>
-    <div className="wrapper">
+    <Wrapper>
       <div>
         <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
           <g fill="none" fillRule="evenodd">
@@ -45,7 +78,7 @@ const Header = ({
           </>
         )}
       </div>
-    </div>
+    </Wrapper>
   </header>
 );
 
