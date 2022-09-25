@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 
 import Button from 'components/examples/Button/Button';
-import styled from '@emotion/styled';
 
 const Wrapper = styled.div`
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
