@@ -56,7 +56,7 @@ const ContentLayout = styled(Layout)`
 `;
 
 const StyledHeader = styled(Header)`
-  background: ${({ theme }) => (theme === 'dark' ? '#001529' : '#fff')};
+  background: #001529;
   padding: 16px;
 `;
 
@@ -98,13 +98,13 @@ export const Main = ({ theme }) => {
   return (
     <MainLayout theme={theme}>
       <Sider
-        theme={theme}
+        theme="dark"
         collapsible
         collapsed={isCollapsed}
         onCollapse={(value) => setIsCollapsed(value)}
       >
         <Logo />
-        <Menu theme={theme} defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
     </MainLayout>
   );
@@ -120,16 +120,16 @@ export const InPage = ({ theme }) => {
   return (
     <MainLayout theme={theme}>
       <Sider
-        theme={theme}
+        theme="dark"
         collapsible
         collapsed={isCollapsed}
         onCollapse={(value) => setIsCollapsed(value)}
       >
         <Logo />
-        <Menu theme={theme} defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
       <ContentLayout>
-        <StyledHeader theme={theme} />
+        <StyledHeader />
         <Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>User</Breadcrumb.Item>
