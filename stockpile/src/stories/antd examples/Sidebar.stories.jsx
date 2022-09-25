@@ -1,6 +1,6 @@
+import 'components/stockpile.css';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import 'components/stockpile.css';
 import {
   Breadcrumb,
   Layout,
@@ -19,40 +19,37 @@ const {
   Header, Content, Footer, Sider,
 } = Layout;
 
-const getBackground = (theme) => {
-  if (theme === 'light') {
-    return '#fff';
-  }
-  if (theme === 'dark') {
-    return '#141414';
-  }
-  return '#fff';
-};
-
 const MainLayout = styled(Layout)`
   min-height: 100vh;
-  max-width: unset;
-  background: ${({ theme }) => getBackground(theme)};
 
   .ant-menu-item {
     margin: 0;
   }
+`;
 
-  svg {
-    vertical-align: unset;
-  }
+const LogoHeader = styled.div`
+  height: 64px;
+  padding: 16px;
+  background: #001529;
 `;
 
 const Logo = styled.div`
   height: 32px;
-  margin: 16px;
   background: rgba(128, 128, 128, 0.7);
 `;
 
 const ContentLayout = styled(Layout)`
-  padding: 0;
-  margin: 0;
-  max-width: unset;
+  ${({ theme }) => (theme === 'dark' && `
+    background: #141414;
+
+    .ant-breadcrumb {
+      color: rgba(255, 255, 255, 0.85)
+    }
+
+    .ant-breadcrumb li:last-child {
+      color: rgba(255, 255, 255, 0.45)
+    }
+  `)}
 `;
 
 const StyledHeader = styled(Header)`
@@ -61,9 +58,22 @@ const StyledHeader = styled(Header)`
 `;
 
 const MainContentContainer = styled.div`
-  background: ${({ theme }) => getBackground(theme)};
+  ${({ theme }) => (theme === 'dark' ? `
+    background: #252525;
+    color: rgba(255, 255, 255, 0.85);
+  ` : `
+    background: #fff;
+  `)}
   padding: 24px;
   min-height: 360px;
+`;
+
+const StyledFooter = styled(Footer)`
+  ${({ theme }) => (theme === 'dark' && `
+    background: #141414;
+    color: rgba(255, 255, 255, 0.85);
+  `)}
+  text-align: center;
 `;
 
 function makeItem(label, key, icon, children) {
@@ -98,13 +108,13 @@ export const Main = ({ theme }) => {
   return (
     <MainLayout theme={theme}>
       <Sider
-        theme="dark"
+        theme={theme}
         collapsible
         collapsed={isCollapsed}
         onCollapse={(value) => setIsCollapsed(value)}
       >
-        <Logo />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <LogoHeader><Logo /></LogoHeader>
+        <Menu theme={theme} defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
     </MainLayout>
   );
@@ -120,28 +130,28 @@ export const InPage = ({ theme }) => {
   return (
     <MainLayout theme={theme}>
       <Sider
-        theme="dark"
+        theme={theme}
         collapsible
         collapsed={isCollapsed}
         onCollapse={(value) => setIsCollapsed(value)}
       >
-        <Logo />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <LogoHeader><Logo /></LogoHeader>
+        <Menu theme={theme} defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
-      <ContentLayout>
+      <ContentLayout theme={theme}>
         <StyledHeader />
         <Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>User</Breadcrumb.Item>
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
-          <MainContentContainer>
+          <MainContentContainer theme={theme}>
             Bill is a cat.
           </MainContentContainer>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>
+        <StyledFooter theme={theme}>
           Ant Design ©2018 Created by Ant UED
-        </Footer>
+        </StyledFooter>
       </ContentLayout>
     </MainLayout>
   );
