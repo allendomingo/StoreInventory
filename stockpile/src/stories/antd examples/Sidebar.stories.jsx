@@ -38,7 +38,7 @@ const MainLayout = styled(Layout)`
     margin: 0;
   }
 
-  .svg {
+  svg {
     vertical-align: unset;
   }
 `;
