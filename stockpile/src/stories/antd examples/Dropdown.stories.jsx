@@ -1,6 +1,6 @@
+import 'components/stockpile.css';
 import React from 'react';
 import PropTypes from 'prop-types';
-import 'components/stockpile.css';
 import { Dropdown, Menu, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
