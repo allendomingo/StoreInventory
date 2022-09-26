@@ -1,0 +1,14 @@
+@import '~antd/dist/antd.css';
+
+/* Colors */
+.stockpile-primary-color {
+    color: #13C2C2;
+}
+
+.stockpile-secondary-color {
+    color: #00203F;
+}
+
+.stockpile-sailor-blue-1 {
+    color: #00203F;
+}
