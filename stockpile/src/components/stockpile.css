@@ -12,3 +12,12 @@
 .stockpile-sailor-blue-1 {
     color: #00203F;
 }
+
+/* Layouts */
+.stockpile-content-container {
+    height: 100%;
+    width: 100%;
+    padding: 24px 24px 24px 32px;
+    display: flex;
+    justify-content: center;
+}
