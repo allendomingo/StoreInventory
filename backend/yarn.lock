@@ -479,7 +479,7 @@
   "version" "1.2.1"
 
 "clean-css@^3.1.9":
-  "integrity" "sha1-vxlF6C/ICPVWlebd6uwBQA79A/8="
+  "integrity" "sha512-aTWyttSdI2mYi07kWqHi24NUU9YlELFKGOAgFzZjDN1064DMAOy2FBuoyGmkKRlXkbpXd0EVHmiVkbKhKoirTw=="
   "resolved" "https://registry.npmjs.org/clean-css/-/clean-css-3.4.28.tgz"
   "version" "3.4.28"
   dependencies:
@@ -530,7 +530,7 @@
   "version" "1.0.11"
 
 "constantinople@~3.0.1":
-  "integrity" "sha1-S5RdmTeQe82Y7ldRIsOBdRZUQUE="
+  "integrity" "sha512-UnEggAQrmhxuTxlb7n1OsTtagNXWUv2CRlOogZhWOU4jLK4EJEbF8UDSNxuGu+jVtWNtO2j51ab2H1wlBIzF/w=="
   "resolved" "https://registry.npmjs.org/constantinople/-/constantinople-3.0.2.tgz"
   "version" "3.0.2"
   dependencies:
@@ -1499,8 +1499,8 @@
   "version" "2.0.0"
 
 "jade@~1.11.0":
-  "integrity" "sha1-nIDlOMEtP7lcjZu5VZ+gzAQEBf0="
-  "resolved" "https://registry.yarnpkg.com/jade/-/jade-1.11.0.tgz"
+  "integrity" "sha512-J76sbGKeLtu7uwW97Ntzb1UvGnpKTDplYa9ROr2gNRhM+SxvlBSG0Ees3TQ8+7ya2UVkzMEeFxhRhEpN68s7Tg=="
+  "resolved" "https://registry.npmjs.org/jade/-/jade-1.11.0.tgz"
   "version" "1.11.0"
   dependencies:
     "character-parser" "1.2.1"
@@ -1771,9 +1771,9 @@
     "brace-expansion" "^1.1.7"
 
 "minimist@^1.2.0", "minimist@^1.2.5":
-  "integrity" "sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw=="
-  "resolved" "https://registry.npmjs.org/minimist/-/minimist-1.2.5.tgz"
-  "version" "1.2.5"
+  "integrity" "sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g=="
+  "resolved" "https://registry.npmjs.org/minimist/-/minimist-1.2.7.tgz"
+  "version" "1.2.7"
 
 "mkdirp@~0.5.0":
   "integrity" "sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ=="
@@ -1791,7 +1791,7 @@
     "whatwg-url" "^11.0.0"
 
 "mongodb-core@2.1.18":
-  "integrity" "sha1-TEYTm986HwMt7ZHbSfOO7AFlkFA="
+  "integrity" "sha512-i+PcaD5a5xF6gc2ujgvQDORV2iSRfoJ+IeBWUZrq37KRMJp+3G79/gPRXVkj/3CEGCPIDDYoTkaRgNpxJDrKBA=="
   "resolved" "https://registry.npmjs.org/mongodb-core/-/mongodb-core-2.1.18.tgz"
   "version" "2.1.18"
   dependencies:
@@ -1811,7 +1811,7 @@
     "saslprep" "^1.0.3"
 
 "mongodb@2.2.34":
-  "integrity" "sha1-o09Zu+thdUrsQy3nLD/iFSakTBo="
+  "integrity" "sha512-JNW3PxPSMaG5Qu1yWb/BwVmAd5/d6sdX0Fy8Av3pAF3KbwDRqormEGIJMoDjiV/JtOR2zRSPk4xHgZxwI/bAnQ=="
   "resolved" "https://registry.npmjs.org/mongodb/-/mongodb-2.2.34.tgz"
   "version" "2.2.34"
   dependencies:
@@ -2063,9 +2063,9 @@
   "version" "1.0.0"
 
 "passport@^0.5.2":
-  "integrity" "sha512-w9n/Ot5I7orGD4y+7V3EFJCQEznE5RxHamUxcqLT2QoJY0f2JdN8GyHonYFvN0Vz+L6lUJfVhrk2aZz2LbuREw=="
-  "resolved" "https://registry.yarnpkg.com/passport/-/passport-0.5.2.tgz"
-  "version" "0.5.2"
+  "integrity" "sha512-gGc+70h4gGdBWNsR3FuV3byLDY6KBTJAIExGFXTpQaYfbbcHCBlRRKx7RBQSpqEqc5Hh2qVzRs7ssvSfOpkUEA=="
+  "resolved" "https://registry.npmjs.org/passport/-/passport-0.5.3.tgz"
+  "version" "0.5.3"
   dependencies:
     "passport-strategy" "1.x.x"
     "pause" "0.0.1"
@@ -2584,7 +2584,7 @@
     "punycode" "^2.1.1"
 
 "transformers@2.1.0":
-  "integrity" "sha1-XSPLNVYd2F3Gf7hIIwm0fVPM6ac="
+  "integrity" "sha512-zJf5m2EIOngmBbDe2fhTPpCjzM2qkZVqrFJZc2jaln+KBeEaYKhS2QMOIkfVrNUyoOwqgbTwOHATzr3jZRQDyg=="
   "resolved" "https://registry.npmjs.org/transformers/-/transformers-2.1.0.tgz"
   "version" "2.1.0"
   dependencies:
@@ -2645,7 +2645,7 @@
     "uglify-to-browserify" "~1.0.0"
 
 "uglify-js@~2.2.5":
-  "integrity" "sha1-puAqcNg5eSuXgEiLe4sYTAlcmcc="
+  "integrity" "sha512-viLk+/8G0zm2aKt1JJAVcz5J/5ytdiNaIsKgrre3yvSUjwVG6ZUujGH7E2TiPigZUwLYCe7eaIUEP2Zka2VJPA=="
   "resolved" "https://registry.npmjs.org/uglify-js/-/uglify-js-2.2.5.tgz"
   "version" "2.2.5"
   dependencies:
