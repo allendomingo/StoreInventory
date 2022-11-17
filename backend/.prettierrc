@@ -15,7 +15,7 @@
   "semi": false,
   "singleQuote": true,
   "tabWidth": 2,
-  "trailingComma": "es5",
+  "trailingComma": "none",
   "useTabs": false,
   "vueIndentScriptAndStyle": false,
   "filepath": "c:\\Users\\Gerlito\\Desktop\\Projects\\StoreInventory\\backend\\src\\app.ts",
