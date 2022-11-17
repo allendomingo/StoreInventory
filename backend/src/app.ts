@@ -1,15 +1,24 @@
 import express, { Request, Response } from 'express'
+import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
-// routes
-import indexRouter, { geee as geeesss } from './routes/index'
+// routers
+import indexRouter from './routes/index'
 
 dotenv.config()
 
 const app = express()
 const port = process.env.PORT
+const mongoURL = process.env.MONGO_URL as string
 
-console.log(geeesss)
+const connect = mongoose.connect(mongoURL)
+console.log(`Connecting to ${process.env.NODE_ENV} enviroment`)
+connect.then(
+  () => {
+    console.log('Connected correctly to server')
+  },
+  (err) => console.log(err)
+)
 
 app.use('/', indexRouter.indexRouter)
 
