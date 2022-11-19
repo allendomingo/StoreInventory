@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose'
+import { model, Schema } from 'mongoose';
 
 enum ContactType {
   supplier = 'Supplier',
@@ -10,13 +10,13 @@ const contactDefinition = {
   numbers: ['0900XXXXXXX'],
   emails: ['juandelacruz@email.com'],
   $contactType: [ContactType.customer]
-}
+};
 
 interface IContact {
-  name: string
-  numbers: [string]
-  emails: [string]
-  contactType: string
+  name: string;
+  numbers: [string];
+  emails: [string];
+  contactType: string;
 }
 
 const contactSchema = new Schema<IContact>(
@@ -41,10 +41,10 @@ const contactSchema = new Schema<IContact>(
   {
     timestamps: true
   }
-)
+);
 
-const Contact = model('Contact', contactSchema)
+const Contact = model('Contact', contactSchema);
 
-export { Contact, contactDefinition }
+export { Contact, contactDefinition };
 
-export default Contact
+export default Contact;

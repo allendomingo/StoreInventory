@@ -11,6 +11,9 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "@typescript-eslint/restrict-template-expressions": "off"
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "semi": "off",
+    "@typescript-eslint/semi": "off",
+    "@typescript-eslint/member-delimiter-style": "off"
   }
 }
