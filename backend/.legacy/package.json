@@ -1,0 +1,41 @@
+{
+  "name": "storeinventory",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node ./bin/www",
+    "dev": "cross-env NODE_ENV=development node ./bin/swagger.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "debug": "~2.6.9",
+    "dotenv": "^14.2.0",
+    "express": "~4.16.1",
+    "http-errors": "^2.0.0",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.3.1",
+    "mongoose": "4.13.21",
+    "mongoose-currency": "^0.2.0",
+    "morgan": "~1.9.1",
+    "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.1.0",
+    "swagger-autogen": "^2.18.8",
+    "swagger-ui-express": "^4.3.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0"
+  }
+}
